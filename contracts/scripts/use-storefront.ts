@@ -15,11 +15,9 @@ async function main() {
     CONTRACTS[network].storefront as `0x${string}`
   );
 
-  await storefront.listProductWithoutVerification(
-    "B0CN6GTNJ1",
-    deployer.address,
-    ethers.parseEther("420")
-  );
+  // await storefront.verifyProduct("B0CN6GTNJ1", "TEST_TOKEN");
+
+  // await storefront.listProduct("B0CN6GTNJ1", ethers.parseEther("72"));
 }
 
 main().catch((error) => {

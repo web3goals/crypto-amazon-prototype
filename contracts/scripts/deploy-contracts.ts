@@ -8,15 +8,21 @@ async function main() {
 
   if (
     !CONTRACTS[network].storefront &&
-    CONTRACTS[network].signProtocol &&
-    CONTRACTS[network].signProtocolSchemaId
+    CONTRACTS[network].chainlink &&
+    CONTRACTS[network].signProtocol
   ) {
     const contractFactory = await ethers.getContractFactory("Storefront");
     const contract = await contractFactory.deploy(
-      CONTRACTS[network].signProtocol,
-      CONTRACTS[network].signProtocolSchemaId
+      CONTRACTS[network].chainlink.router
     );
     await contract.waitForDeployment();
+    await contract.setData(
+      CONTRACTS[network].chainlink.donId,
+      CONTRACTS[network].chainlink.subscriptionId,
+      CONTRACTS[network].chainlink.source,
+      CONTRACTS[network].signProtocol.address,
+      CONTRACTS[network].signProtocol.schemaId
+    );
     console.log(
       `Contract 'Storefront' deployed to: ${await contract.getAddress()}`
     );
