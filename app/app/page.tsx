@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { CompassIcon, ShoppingBasketIcon, StoreIcon } from "lucide-react";
+import { CompassIcon, StoreIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
