@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ShoppingBasketIcon, StoreIcon } from "lucide-react";
+import { CompassIcon, ShoppingBasketIcon, StoreIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,14 +14,14 @@ export default function LandingPage() {
         in a few clicks
       </h2>
       <div className="flex flex-row gap-2 mt-6">
-        <Link href="/products">
+        <Link href="/seller">
           <Button variant="default" size="lg">
-            <ShoppingBasketIcon className="mr-2 h-4 w-4" /> Buy
+            <StoreIcon className="mr-2 h-4 w-4" /> Sell
           </Button>
         </Link>
-        <Link href="/seller">
+        <Link href="/products">
           <Button variant="secondary" size="lg">
-            <StoreIcon className="mr-2 h-4 w-4" /> Sell
+            <CompassIcon className="mr-2 h-4 w-4" /> Explore
           </Button>
         </Link>
       </div>
