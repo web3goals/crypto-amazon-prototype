@@ -7,11 +7,10 @@ import { Button } from "./ui/button";
 import { useToast } from "./ui/use-toast";
 
 export function SellerProducts() {
+  const { toast } = useToast();
   const [state, setState] = useState<
     "CHOICE" | "TEST_ACCOUNT" | "REAL_ACCOUNT"
   >("CHOICE");
-
-  const { toast } = useToast();
 
   if (state === "CHOICE") {
     return (
