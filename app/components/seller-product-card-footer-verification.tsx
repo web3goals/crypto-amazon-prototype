@@ -1,37 +1,32 @@
 "use client";
 
+import { storefrontAbi } from "@/abi/storefront";
+import { ChainConfig } from "@/config/chains";
 import useError from "@/hooks/useError";
 import { Product } from "@/lib/products";
-import { cn } from "@/lib/utils";
-import { ClassValue } from "clsx";
 import { Loader2, ShieldCheckIcon } from "lucide-react";
 import { useState } from "react";
 import { useAccount, usePublicClient, useWalletClient } from "wagmi";
 import { Button } from "./ui/button";
-import { ChainConfig } from "@/config/chains";
-import { storefrontAbi } from "@/abi/storefront";
 
 export function SellerProductCardFooterVerification(props: {
   product: Product;
   sellerAmazonToken: string;
   storefrontChainConfing: ChainConfig;
-  className?: ClassValue;
 }) {
   const [verified, setVerified] = useState(false);
 
+  if (verified) {
+    return <SellerProductCardFooterVerificationMessage />;
+  }
+
   return (
-    <div className={cn(props.className)}>
-      {verified ? (
-        <SellerProductCardFooterVerificationMessage />
-      ) : (
-        <SellerProductCardFooterVerificationButton
-          product={props.product}
-          sellerAmazonToken={props.sellerAmazonToken}
-          storefrontChainConfing={props.storefrontChainConfing}
-          onVerify={() => setVerified(true)}
-        />
-      )}
-    </div>
+    <SellerProductCardFooterVerificationButton
+      product={props.product}
+      sellerAmazonToken={props.sellerAmazonToken}
+      storefrontChainConfing={props.storefrontChainConfing}
+      onVerify={() => setVerified(true)}
+    />
   );
 }
 
@@ -77,21 +72,23 @@ function SellerProductCardFooterVerificationButton(props: {
   }
 
   return (
-    <Button variant="default" disabled={verifying} onClick={() => onVerify()}>
-      {verifying ? (
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-      ) : (
-        <ShieldCheckIcon className="mr-2 h-4 w-4" />
-      )}
-      Verify
-    </Button>
+    <div>
+      <Button variant="default" disabled={verifying} onClick={() => onVerify()}>
+        {verifying ? (
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        ) : (
+          <ShieldCheckIcon className="mr-2 h-4 w-4" />
+        )}
+        Verify
+      </Button>
+    </div>
   );
 }
 
 function SellerProductCardFooterVerificationMessage() {
   return (
     <div>
-      <p className="text font-bold">Verification request sent 👌</p>
+      <p className="text-base font-bold">Verification request sent 👌</p>
       <p className="text-sm text-muted-foreground mt-1">
         Reload the page to see the updates
       </p>
