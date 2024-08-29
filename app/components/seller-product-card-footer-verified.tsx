@@ -8,7 +8,7 @@ import { toast } from "./ui/use-toast";
 
 export function SellerProductCardFooterVerified(props: {
   product: Product;
-  storefrontChainConfing: ChainConfig;
+  storefrontChainConfig: ChainConfig;
 }) {
   const [state, setState] = useState<"SELLING" | "SUMMARIZING" | undefined>();
 
@@ -16,7 +16,7 @@ export function SellerProductCardFooterVerified(props: {
     return (
       <SellerProductCardFooterSelling
         product={props.product}
-        storefrontChainConfing={props.storefrontChainConfing}
+        storefrontChainConfig={props.storefrontChainConfig}
       />
     );
   }

@@ -19,7 +19,7 @@ import { Input } from "./ui/input";
 
 export function SellerProductCardFooterSelling(props: {
   product: Product;
-  storefrontChainConfing: ChainConfig;
+  storefrontChainConfig: ChainConfig;
 }) {
   const [listed, setListed] = useState(false);
 
@@ -30,7 +30,7 @@ export function SellerProductCardFooterSelling(props: {
   return (
     <SellerProductCardFooterSellingForm
       product={props.product}
-      storefrontChainConfing={props.storefrontChainConfing}
+      storefrontChainConfig={props.storefrontChainConfig}
       onList={() => setListed(true)}
     />
   );
@@ -38,7 +38,7 @@ export function SellerProductCardFooterSelling(props: {
 
 function SellerProductCardFooterSellingForm(props: {
   product: Product;
-  storefrontChainConfing: ChainConfig;
+  storefrontChainConfig: ChainConfig;
   onList: () => void;
 }) {
   const { handleError } = useError();
@@ -71,11 +71,11 @@ function SellerProductCardFooterSellingForm(props: {
       }
       // Send tx
       const txHash = await walletClient.writeContract({
-        address: props.storefrontChainConfing.storefront,
+        address: props.storefrontChainConfig.storefront,
         abi: storefrontAbi,
         functionName: "listProduct",
         args: [props.product.asin, parseEther(String(values.price))],
-        chain: props.storefrontChainConfing.chain,
+        chain: props.storefrontChainConfig.chain,
       });
       await publicClient.waitForTransactionReceipt({
         hash: txHash,

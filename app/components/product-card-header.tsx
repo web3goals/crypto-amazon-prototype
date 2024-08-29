@@ -5,21 +5,21 @@ import { ChainConfig } from "@/config/chains";
 import { addressToShortAddress } from "@/lib/converters";
 import { Product } from "@/lib/products";
 import { ShieldCheckIcon } from "lucide-react";
-import { isAddressEqual, zeroAddress } from "viem";
+import { formatEther, isAddressEqual, zeroAddress } from "viem";
 import { useReadContract } from "wagmi";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
-// TODO: Load price
 export function ProductCardHeader(props: {
   product: Product;
-  storefrontChainConfing: ChainConfig;
+  price: bigint | undefined;
+  storefrontChainConfig: ChainConfig;
 }) {
   const { data: verifiedSeller } = useReadContract({
-    address: props.storefrontChainConfing.storefront,
+    address: props.storefrontChainConfig.storefront,
     abi: storefrontAbi,
     functionName: "getVerifiedSeller",
     args: [props.product.asin],
-    chainId: props.storefrontChainConfing.chain.id,
+    chainId: props.storefrontChainConfig.chain.id,
   });
 
   return (
@@ -49,7 +49,7 @@ export function ProductCardHeader(props: {
         {verifiedSeller && (
           <a
             href={
-              props.storefrontChainConfing.chain.blockExplorers?.default.url +
+              props.storefrontChainConfig.chain.blockExplorers?.default.url +
               "/address/" +
               verifiedSeller
             }
@@ -70,6 +70,12 @@ export function ProductCardHeader(props: {
           <p className="text-sm break-all">{props.product.asin}</p>
         </a>
       </div>
+      {props.price && (
+        <div className="flex flex-col md:flex-row md:gap-3 mt-2">
+          <p className="min-w-[60px] text-sm text-muted-foreground">Price:</p>
+          <p className="text-sm break-all">{formatEther(props.price)} USD</p>
+        </div>
+      )}
     </div>
   );
 }

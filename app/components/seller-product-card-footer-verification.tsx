@@ -12,7 +12,7 @@ import { Button } from "./ui/button";
 export function SellerProductCardFooterVerification(props: {
   product: Product;
   sellerAmazonToken: string;
-  storefrontChainConfing: ChainConfig;
+  storefrontChainConfig: ChainConfig;
 }) {
   const [verified, setVerified] = useState(false);
 
@@ -24,7 +24,7 @@ export function SellerProductCardFooterVerification(props: {
     <SellerProductCardFooterVerificationButton
       product={props.product}
       sellerAmazonToken={props.sellerAmazonToken}
-      storefrontChainConfing={props.storefrontChainConfing}
+      storefrontChainConfig={props.storefrontChainConfig}
       onVerify={() => setVerified(true)}
     />
   );
@@ -33,7 +33,7 @@ export function SellerProductCardFooterVerification(props: {
 function SellerProductCardFooterVerificationButton(props: {
   product: Product;
   sellerAmazonToken: string;
-  storefrontChainConfing: ChainConfig;
+  storefrontChainConfig: ChainConfig;
   onVerify: () => void;
 }) {
   const { handleError } = useError();
@@ -55,11 +55,11 @@ function SellerProductCardFooterVerificationButton(props: {
       }
       // Send tx
       const txHash = await walletClient.writeContract({
-        address: props.storefrontChainConfing.storefront,
+        address: props.storefrontChainConfig.storefront,
         abi: storefrontAbi,
         functionName: "verifyProduct",
         args: [props.product.asin, props.sellerAmazonToken],
-        chain: props.storefrontChainConfing.chain,
+        chain: props.storefrontChainConfig.chain,
       });
       await publicClient.waitForTransactionReceipt({
         hash: txHash,
