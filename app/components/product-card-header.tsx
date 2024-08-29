@@ -1,13 +1,14 @@
 "use client";
 
-import { Product } from "@/lib/products";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { useReadContract } from "wagmi";
 import { storefrontAbi } from "@/abi/storefront";
 import { ChainConfig } from "@/config/chains";
 import { addressToShortAddress } from "@/lib/converters";
+import { Product } from "@/lib/products";
+import { ShieldCheckIcon } from "lucide-react";
+import { isAddressEqual, zeroAddress } from "viem";
+import { useReadContract } from "wagmi";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
-// TODO: Display verification status
 // TODO: Load price
 export function ProductCardHeader(props: {
   product: Product;
@@ -22,12 +23,20 @@ export function ProductCardHeader(props: {
   });
 
   return (
-    <div>
+    <div className="flex flex-col items-start">
       <Avatar className="size-48 rounded-sm">
         <AvatarImage src={props.product.image} alt="Product" />
         <AvatarFallback className="text-6xl rounded-sm">🖼️</AvatarFallback>
       </Avatar>
       <p className="text font-bold mt-4">{props.product.title}</p>
+      {verifiedSeller && !isAddressEqual(verifiedSeller, zeroAddress) && (
+        <div className="flex flex-row items-center gap-1 bg-primary px-3 py-1.5 rounded-xl mt-2">
+          <ShieldCheckIcon className="text-primary-foreground h-4 w-4" />
+          <p className="text-xs font-semibold text-primary-foreground">
+            Seller & Product Verified
+          </p>
+        </div>
+      )}
       <div className="flex flex-col md:flex-row md:gap-3 mt-4">
         <p className="min-w-[60px] text-sm text-muted-foreground">Seller:</p>
         <a
