@@ -53,7 +53,10 @@ export function SellerProductCard(props: {
         />
       )}
       {state === "VERIFIED" && (
-        <SellerProductCardFooterVerified product={props.product} />
+        <SellerProductCardFooterVerified
+          product={props.product}
+          storefrontChainConfing={storefrontChainConfing}
+        />
       )}
     </div>
   );
