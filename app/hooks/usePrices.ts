@@ -1,10 +1,10 @@
-import { ChainConfig } from "@/config/chains";
+import { getStorefrontChainConfig } from "@/lib/chains";
 import { errorToString } from "@/lib/converters";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { decodeAbiParameters } from "viem";
 
-export default function usePrices(storefrontChainConfig: ChainConfig) {
+export default function usePrices() {
   const [prices, setPrices] = useState<Map<string, bigint> | undefined>();
 
   function dataToPrices(data: any): Map<string, bigint> {
@@ -22,16 +22,16 @@ export default function usePrices(storefrontChainConfig: ChainConfig) {
 
   useEffect(() => {
     const url =
-      storefrontChainConfig.signProtocolApi +
+      getStorefrontChainConfig().signProtocolApi +
       "/index/attestations?schemaId=" +
-      storefrontChainConfig.signProtocolSchemaId;
+      getStorefrontChainConfig().signProtocolSchemaId;
     axios
       .get(url)
       .then(({ data }) => setPrices(dataToPrices(data)))
       .catch((error) =>
         console.error("Failed to get product price:" + errorToString(error))
       );
-  }, [storefrontChainConfig]);
+  }, []);
 
   return { prices };
 }

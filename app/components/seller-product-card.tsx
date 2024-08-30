@@ -1,7 +1,7 @@
 "use client";
 
 import { storefrontAbi } from "@/abi/storefront";
-import { ChainConfig } from "@/config/chains";
+import { getStorefrontChainConfig } from "@/lib/chains";
 import { Product } from "@/lib/products";
 import { useEffect, useState } from "react";
 import { isAddressEqual } from "viem";
@@ -14,7 +14,6 @@ import { Separator } from "./ui/separator";
 export function SellerProductCard(props: {
   product: Product;
   price: bigint | undefined;
-  storefrontChainConfig: ChainConfig;
   sellerAmazonToken: string;
 }) {
   const { address } = useAccount();
@@ -23,11 +22,11 @@ export function SellerProductCard(props: {
   >();
 
   const { data: verifiedSeller } = useReadContract({
-    address: props.storefrontChainConfig.storefront,
+    address: getStorefrontChainConfig().storefront,
     abi: storefrontAbi,
     functionName: "getVerifiedSeller",
     args: [props.product.asin],
-    chainId: props.storefrontChainConfig.chain.id,
+    chainId: getStorefrontChainConfig().chain.id,
   });
 
   useEffect(() => {
@@ -41,24 +40,16 @@ export function SellerProductCard(props: {
 
   return (
     <div className="w-full flex flex-col border rounded px-6 py-8">
-      <ProductCardHeader
-        product={props.product}
-        price={props.price}
-        storefrontChainConfig={props.storefrontChainConfig}
-      />
+      <ProductCardHeader product={props.product} price={props.price} />
       <Separator className="my-6" />
       {state === "VERIFICATION_REQUIRED" && (
         <SellerProductCardFooterVerification
           product={props.product}
           sellerAmazonToken={props.sellerAmazonToken}
-          storefrontChainConfig={props.storefrontChainConfig}
         />
       )}
       {state === "VERIFIED" && (
-        <SellerProductCardFooterVerified
-          product={props.product}
-          storefrontChainConfig={props.storefrontChainConfig}
-        />
+        <SellerProductCardFooterVerified product={props.product} />
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { storefrontAbi } from "@/abi/storefront";
-import { ChainConfig } from "@/config/chains";
+import { getStorefrontChainConfig } from "@/lib/chains";
 import { addressToShortAddress } from "@/lib/converters";
 import { Product } from "@/lib/products";
 import { ShieldCheckIcon } from "lucide-react";
@@ -12,14 +12,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 export function ProductCardHeader(props: {
   product: Product;
   price: bigint | undefined;
-  storefrontChainConfig: ChainConfig;
 }) {
   const { data: verifiedSeller } = useReadContract({
-    address: props.storefrontChainConfig.storefront,
+    address: getStorefrontChainConfig().storefront,
     abi: storefrontAbi,
     functionName: "getVerifiedSeller",
     args: [props.product.asin],
-    chainId: props.storefrontChainConfig.chain.id,
+    chainId: getStorefrontChainConfig().chain.id,
   });
 
   return (
@@ -49,7 +48,7 @@ export function ProductCardHeader(props: {
         {verifiedSeller && (
           <a
             href={
-              props.storefrontChainConfig.chain.blockExplorers?.default.url +
+              getStorefrontChainConfig().chain.blockExplorers?.default.url +
               "/address/" +
               verifiedSeller
             }

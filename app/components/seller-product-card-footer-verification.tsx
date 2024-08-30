@@ -1,8 +1,8 @@
 "use client";
 
 import { storefrontAbi } from "@/abi/storefront";
-import { ChainConfig } from "@/config/chains";
 import useError from "@/hooks/useError";
+import { getStorefrontChainConfig } from "@/lib/chains";
 import { Product } from "@/lib/products";
 import { Loader2, ShieldCheckIcon } from "lucide-react";
 import { useState } from "react";
@@ -12,7 +12,6 @@ import { Button } from "./ui/button";
 export function SellerProductCardFooterVerification(props: {
   product: Product;
   sellerAmazonToken: string;
-  storefrontChainConfig: ChainConfig;
 }) {
   const [verified, setVerified] = useState(false);
 
@@ -24,7 +23,6 @@ export function SellerProductCardFooterVerification(props: {
     <SellerProductCardFooterVerificationButton
       product={props.product}
       sellerAmazonToken={props.sellerAmazonToken}
-      storefrontChainConfig={props.storefrontChainConfig}
       onVerify={() => setVerified(true)}
     />
   );
@@ -33,7 +31,6 @@ export function SellerProductCardFooterVerification(props: {
 function SellerProductCardFooterVerificationButton(props: {
   product: Product;
   sellerAmazonToken: string;
-  storefrontChainConfig: ChainConfig;
   onVerify: () => void;
 }) {
   const { handleError } = useError();
@@ -55,11 +52,11 @@ function SellerProductCardFooterVerificationButton(props: {
       }
       // Send tx
       const txHash = await walletClient.writeContract({
-        address: props.storefrontChainConfig.storefront,
+        address: getStorefrontChainConfig().storefront,
         abi: storefrontAbi,
         functionName: "verifyProduct",
         args: [props.product.asin, props.sellerAmazonToken],
-        chain: props.storefrontChainConfig.chain,
+        chain: getStorefrontChainConfig().chain,
       });
       await publicClient.waitForTransactionReceipt({
         hash: txHash,

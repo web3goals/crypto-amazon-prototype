@@ -1,8 +1,8 @@
 "use client";
 
 import { storefrontAbi } from "@/abi/storefront";
-import { ChainConfig } from "@/config/chains";
 import useError from "@/hooks/useError";
+import { getStorefrontChainConfig } from "@/lib/chains";
 import { Product } from "@/lib/products";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BarcodeIcon, CheckIcon, Loader2 } from "lucide-react";
@@ -17,10 +17,7 @@ import { Button } from "./ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 
-export function SellerProductCardFooterSelling(props: {
-  product: Product;
-  storefrontChainConfig: ChainConfig;
-}) {
+export function SellerProductCardFooterSelling(props: { product: Product }) {
   const [listed, setListed] = useState(false);
 
   if (listed) {
@@ -30,7 +27,6 @@ export function SellerProductCardFooterSelling(props: {
   return (
     <SellerProductCardFooterSellingForm
       product={props.product}
-      storefrontChainConfig={props.storefrontChainConfig}
       onList={() => setListed(true)}
     />
   );
@@ -38,7 +34,6 @@ export function SellerProductCardFooterSelling(props: {
 
 function SellerProductCardFooterSellingForm(props: {
   product: Product;
-  storefrontChainConfig: ChainConfig;
   onList: () => void;
 }) {
   const { handleError } = useError();
@@ -71,11 +66,11 @@ function SellerProductCardFooterSellingForm(props: {
       }
       // Send tx
       const txHash = await walletClient.writeContract({
-        address: props.storefrontChainConfig.storefront,
+        address: getStorefrontChainConfig().storefront,
         abi: storefrontAbi,
         functionName: "listProduct",
         args: [props.product.asin, parseEther(String(values.price))],
-        chain: props.storefrontChainConfig.chain,
+        chain: getStorefrontChainConfig().chain,
       });
       await publicClient.waitForTransactionReceipt({
         hash: txHash,

@@ -1,4 +1,3 @@
-import { ChainConfig } from "@/config/chains";
 import { Product } from "@/lib/products";
 import { CircleDollarSignIcon, WandSparklesIcon } from "lucide-react";
 import { useState } from "react";
@@ -6,19 +5,11 @@ import { SellerProductCardFooterSelling } from "./seller-product-card-footer-sel
 import { Button } from "./ui/button";
 import { toast } from "./ui/use-toast";
 
-export function SellerProductCardFooterVerified(props: {
-  product: Product;
-  storefrontChainConfig: ChainConfig;
-}) {
+export function SellerProductCardFooterVerified(props: { product: Product }) {
   const [state, setState] = useState<"SELLING" | "SUMMARIZING" | undefined>();
 
   if (state === "SELLING") {
-    return (
-      <SellerProductCardFooterSelling
-        product={props.product}
-        storefrontChainConfig={props.storefrontChainConfig}
-      />
-    );
+    return <SellerProductCardFooterSelling product={props.product} />;
   }
 
   return (
