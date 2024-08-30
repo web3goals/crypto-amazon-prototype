@@ -1,5 +1,6 @@
 "use client";
 
+import { getSupportedChains } from "@/lib/chains";
 import { addressToShortAddress } from "@/lib/converters";
 import { LogOutIcon, NetworkIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -14,7 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { supportedChains, wagmiConfig } from "./web3-provider";
+import { wagmiConfig } from "./web3-provider";
 
 export function SiteHeaderConnectButton() {
   const [domLoaded, setDomLoaded] = useState(false);
@@ -41,7 +42,7 @@ export function SiteHeaderConnectButton() {
         <DropdownMenuContent>
           <DropdownMenuLabel>Chains</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {supportedChains.map((chain, index) => (
+          {getSupportedChains().map((chain, index) => (
             <DropdownMenuItem
               key={index}
               onClick={() => switchChain(wagmiConfig, { chainId: chain.id })}
