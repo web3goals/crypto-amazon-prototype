@@ -2,6 +2,7 @@
 
 import { siteConfig } from "@/config/site";
 import {
+  CoinsIcon,
   CompassIcon,
   GithubIcon,
   HandshakeIcon,
@@ -90,6 +91,12 @@ export function SiteHeader() {
                 </DropdownMenuItem>
               </Link>
               <DropdownMenuSeparator />
+              <Link href="/faucet">
+                <DropdownMenuItem>
+                  <CoinsIcon className="mr-2 h-4 w-4" />
+                  <span>Faucet</span>
+                </DropdownMenuItem>
+              </Link>
               <Link href={siteConfig.links.github} target="_blank">
                 <DropdownMenuItem>
                   <GithubIcon className="mr-2 h-4 w-4" />
