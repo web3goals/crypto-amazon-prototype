@@ -6,6 +6,7 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
+// TODO: Add list with purchases for buyers
 contract Checkout is Ownable, ReentrancyGuard {
     struct Sale {
         string asin;
@@ -109,6 +110,10 @@ contract Checkout is Ownable, ReentrancyGuard {
 
     function getBalance(address seller) external view returns (uint) {
         return _balances[seller];
+    }
+
+    function getPaymentToken() external view returns (address) {
+        return address(_paymentToken);
     }
 
     function getChainlinkDataFeedAnswer() external view returns (int) {

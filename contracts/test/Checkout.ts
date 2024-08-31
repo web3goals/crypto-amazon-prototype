@@ -66,7 +66,7 @@ describe("Checkout", function () {
     expect(await checkoutContract.getBalance(seller.address)).to.be.equal(0);
   });
 
-  it.only("Should use custom data feed answer", async function () {
+  it("Should use custom data feed answer", async function () {
     const { deployer, checkoutContract } = await loadFixture(initFixture);
     // Check before setting
     expect(await checkoutContract.getChainlinkDataFeedAnswer()).to.be.equal(0);
