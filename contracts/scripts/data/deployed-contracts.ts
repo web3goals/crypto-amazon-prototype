@@ -16,8 +16,8 @@ export const CONTRACTS: {
           schemaId: `0x${string}`;
         }
       | undefined;
-
     storefront: `0x${string}` | undefined;
+    usdt: `0x${string}` | undefined;
   };
 } = {
   optimismSepolia: {
@@ -33,5 +33,6 @@ export const CONTRACTS: {
       schemaId: "0x5",
     },
     storefront: "0x61c582d77F0C92B7831bEC1ABfe8176e11832A52",
+    usdt: "0x55FC13643e03284242941F043967583aB79b288F",
   },
 };

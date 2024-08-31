@@ -27,6 +27,15 @@ async function main() {
       `Contract 'Storefront' deployed to: ${await contract.getAddress()}`
     );
   }
+
+  if (!CONTRACTS[network].usdt) {
+    const contractFactory = await ethers.getContractFactory("USDToken");
+    const contract = await contractFactory.deploy();
+    await contract.waitForDeployment();
+    console.log(
+      `Contract 'USDToken' deployed to: ${await contract.getAddress()}`
+    );
+  }
 }
 
 main().catch((error) => {
