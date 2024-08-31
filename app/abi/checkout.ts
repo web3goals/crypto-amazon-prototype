@@ -142,9 +142,65 @@ export const checkoutAbi = [
   {
     inputs: [
       {
-        internalType: "string",
-        name: "asin",
-        type: "string",
+        internalType: "address",
+        name: "buyer",
+        type: "address",
+      },
+    ],
+    name: "getPurchases",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "string",
+            name: "asin",
+            type: "string",
+          },
+          {
+            internalType: "address",
+            name: "seller",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "buyer",
+            type: "address",
+          },
+          {
+            internalType: "string",
+            name: "buyerName",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "buyerAddress",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "date",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "paymentAmount",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct Checkout.Deal[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "seller",
+        type: "address",
       },
     ],
     name: "getSales",
@@ -187,7 +243,7 @@ export const checkoutAbi = [
             type: "uint256",
           },
         ],
-        internalType: "struct Checkout.Sale[]",
+        internalType: "struct Checkout.Deal[]",
         name: "",
         type: "tuple[]",
       },

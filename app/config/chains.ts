@@ -16,7 +16,7 @@ export const chainConfigs = {
     chain: optimismSepolia,
     usdt: "0x55FC13643e03284242941F043967583aB79b288F",
     storefront: "0x61c582d77F0C92B7831bEC1ABfe8176e11832A52",
-    checkout: "0xBbe8B463386422dd9aFEc48a6e1381027C3Cba20",
+    checkout: "0xE008d8d7C4a0368c68a37DE2e9E0D5C323EA9978",
     checkoutPaymentTokenSymbol: "USDT",
     signProtocolApi: "https://testnet-rpc.sign.global/api",
     signProtocolSchemaId: "onchain_evm_11155420_0x5",

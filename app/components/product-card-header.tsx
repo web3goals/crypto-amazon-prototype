@@ -6,11 +6,19 @@ import { Product } from "@/lib/products";
 import { ShieldCheckIcon } from "lucide-react";
 import { Address, formatEther, isAddressEqual, zeroAddress } from "viem";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { ChainConfig } from "@/config/chains";
 
 export function ProductCardHeader(props: {
   product: Product;
   price: bigint | undefined;
   verifiedSeller: Address | undefined;
+  deal?: {
+    buyer: Address;
+    date: bigint;
+    paymentAmount: bigint;
+    paymentTokenSymbol: string;
+    chainConfig: ChainConfig;
+  };
 }) {
   return (
     <div className="flex flex-col items-start">
@@ -29,7 +37,7 @@ export function ProductCardHeader(props: {
           </div>
         )}
       <div className="flex flex-col md:flex-row md:gap-3 mt-4">
-        <p className="min-w-[60px] text-sm text-muted-foreground">Seller:</p>
+        <p className="min-w-[90px] text-sm text-muted-foreground">Seller:</p>
         <a
           href={`https://www.amazon.com/sp?&seller=${props.product.seller}`}
           target="_blank"
@@ -52,7 +60,7 @@ export function ProductCardHeader(props: {
         )}
       </div>
       <div className="flex flex-col md:flex-row md:gap-3 mt-2">
-        <p className="min-w-[60px] text-sm text-muted-foreground">ASIN:</p>
+        <p className="min-w-[90px] text-sm text-muted-foreground">ASIN:</p>
         <a
           href={`https://www.amazon.com/dp/${props.product.asin}`}
           target="_blank"
@@ -62,11 +70,47 @@ export function ProductCardHeader(props: {
         </a>
       </div>
       <div className="flex flex-col md:flex-row md:gap-3 mt-2">
-        <p className="min-w-[60px] text-sm text-muted-foreground">Price:</p>
+        <p className="min-w-[90px] text-sm text-muted-foreground">Price:</p>
         <p className="text-sm break-all">
           {props.price ? `${formatEther(props.price)} USD` : "Unsaleable"}
         </p>
       </div>
+      {props.deal && (
+        <>
+          <div className="flex flex-col md:flex-row md:gap-3 mt-2">
+            <p className="min-w-[90px] text-sm text-muted-foreground">Buyer:</p>
+            <a
+              href={
+                props.deal.chainConfig.chain.blockExplorers?.default.url +
+                "/address/" +
+                props.deal.buyer
+              }
+              target="_blank"
+              className="text-sm break-all underline underline-offset-4"
+            >
+              {addressToShortAddress(props.deal.buyer)}
+            </a>
+          </div>
+          <div className="flex flex-col md:flex-row md:gap-3 mt-2">
+            <p className="min-w-[90px] text-sm text-muted-foreground">
+              Payment:
+            </p>
+            <p className="text-sm break-all">
+              {formatEther(props.deal.paymentAmount)}{" "}
+              {props.deal.paymentTokenSymbol} (
+              {props.deal.chainConfig.chain.name})
+            </p>
+          </div>
+          <div className="flex flex-col md:flex-row md:gap-3 mt-2">
+            <p className="min-w-[90px] text-sm text-muted-foreground">
+              Payment Date:
+            </p>
+            <p className="text-sm break-all">
+              {new Date(Number(props.deal.date) * 1000).toLocaleString()}
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 }
