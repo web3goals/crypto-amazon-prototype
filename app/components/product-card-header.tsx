@@ -69,12 +69,12 @@ export function ProductCardHeader(props: {
           <p className="text-sm break-all">{props.product.asin}</p>
         </a>
       </div>
-      {props.price && (
-        <div className="flex flex-col md:flex-row md:gap-3 mt-2">
-          <p className="min-w-[60px] text-sm text-muted-foreground">Price:</p>
-          <p className="text-sm break-all">{formatEther(props.price)} USD</p>
-        </div>
-      )}
+      <div className="flex flex-col md:flex-row md:gap-3 mt-2">
+        <p className="min-w-[60px] text-sm text-muted-foreground">Price:</p>
+        <p className="text-sm break-all">
+          {props.price ? `${formatEther(props.price)} USD` : "Unsaleable"}
+        </p>
+      </div>
     </div>
   );
 }
