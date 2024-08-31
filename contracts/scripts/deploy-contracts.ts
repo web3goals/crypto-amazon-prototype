@@ -8,18 +8,18 @@ async function main() {
 
   if (
     !CONTRACTS[network].storefront &&
-    CONTRACTS[network].chainlink &&
+    CONTRACTS[network].chainlinkFunctions &&
     CONTRACTS[network].signProtocol
   ) {
     const contractFactory = await ethers.getContractFactory("Storefront");
     const contract = await contractFactory.deploy(
-      CONTRACTS[network].chainlink.router
+      CONTRACTS[network].chainlinkFunctions.router
     );
     await contract.waitForDeployment();
     await contract.setData(
-      CONTRACTS[network].chainlink.donId,
-      CONTRACTS[network].chainlink.subscriptionId,
-      CONTRACTS[network].chainlink.source,
+      CONTRACTS[network].chainlinkFunctions.donId,
+      CONTRACTS[network].chainlinkFunctions.subscriptionId,
+      CONTRACTS[network].chainlinkFunctions.source,
       CONTRACTS[network].signProtocol.address,
       CONTRACTS[network].signProtocol.schemaId
     );
@@ -34,6 +34,22 @@ async function main() {
     await contract.waitForDeployment();
     console.log(
       `Contract 'USDToken' deployed to: ${await contract.getAddress()}`
+    );
+  }
+
+  if (
+    !CONTRACTS[network].checkout &&
+    CONTRACTS[network].chainlinkDataFeed &&
+    CONTRACTS[network].usdt
+  ) {
+    const contractFactory = await ethers.getContractFactory("Checkout");
+    const contract = await contractFactory.deploy(
+      CONTRACTS[network].chainlinkDataFeed,
+      CONTRACTS[network].usdt
+    );
+    await contract.waitForDeployment();
+    console.log(
+      `Contract 'Checkout' deployed to: ${await contract.getAddress()}`
     );
   }
 }

@@ -2,7 +2,7 @@ export const CHAINLINK_SOURCE = `const asin = args[0]; const sellerAmazonToken =
 
 export const CONTRACTS: {
   [key: string]: {
-    chainlink:
+    chainlinkFunctions:
       | {
           router: `0x${string}`;
           donId: `0x${string}`;
@@ -10,6 +10,7 @@ export const CONTRACTS: {
           source: string;
         }
       | undefined;
+    chainlinkDataFeed: `0x${string}` | undefined;
     signProtocol:
       | {
           address: `0x${string}`;
@@ -18,21 +19,24 @@ export const CONTRACTS: {
       | undefined;
     storefront: `0x${string}` | undefined;
     usdt: `0x${string}` | undefined;
+    checkout: `0x${string}` | undefined;
   };
 } = {
   optimismSepolia: {
-    chainlink: {
+    chainlinkFunctions: {
       router: "0xC17094E3A1348E5C7544D4fF8A36c28f2C6AAE28",
       donId:
         "0x66756e2d6f7074696d69736d2d7365706f6c69612d3100000000000000000000",
       subscriptionId: 225,
       source: CHAINLINK_SOURCE,
     },
+    chainlinkDataFeed: "0xF83696ca1b8a266163bE252bE2B94702D4929392",
     signProtocol: {
       address: "0x4e4af2a21ebf62850fD99Eb6253E1eFBb56098cD",
       schemaId: "0x5",
     },
     storefront: "0x61c582d77F0C92B7831bEC1ABfe8176e11832A52",
     usdt: "0x55FC13643e03284242941F043967583aB79b288F",
+    checkout: "0x6B4C1C84fBcBcF633E4E754e8f68fB82D0E880EB",
   },
 };
