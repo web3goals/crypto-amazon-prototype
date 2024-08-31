@@ -53,8 +53,12 @@ describe("Checkout", function () {
       [buyer, checkoutContract],
       [ethers.parseEther("-42.42"), ethers.parseEther("42.42")]
     );
-    // Check sales
-    expect(await checkoutContract.getSales("XYZ")).to.have.length(1);
+    // Check balance, sales and purchases
+    expect(await checkoutContract.getBalance(seller)).to.be.equal(
+      ethers.parseEther("42.42")
+    );
+    expect(await checkoutContract.getSales(seller)).to.have.length(1);
+    expect(await checkoutContract.getPurchases(buyer)).to.have.length(1);
     // Withdraw balance
     await expect(
       checkoutContract.connect(seller).withdrawBalance()

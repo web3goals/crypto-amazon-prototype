@@ -6,9 +6,8 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
-// TODO: Add list with purchases for buyers
 contract Checkout is Ownable, ReentrancyGuard {
-    struct Sale {
+    struct Deal {
         string asin;
         address seller;
         address buyer;
@@ -21,8 +20,10 @@ contract Checkout is Ownable, ReentrancyGuard {
     AggregatorV3Interface private _chainlinkDataFeed;
     int _customChainlinkDataFeedAnswer;
     IERC20 private _paymentToken;
-    mapping(string asin => Sale[] sales) _sales;
+    Deal[] private _deals;
     mapping(address seller => uint256 balance) _balances;
+    mapping(address seller => uint256 sales) _sales;
+    mapping(address buyer => uint256 purchases) _purchases;
 
     constructor(
         address chainlinkDataFeed,
@@ -72,8 +73,8 @@ contract Checkout is Ownable, ReentrancyGuard {
             ),
             "Failed to transfer payment to contract"
         );
-        // Save sale
-        Sale memory sale = Sale(
+        // Save deal
+        Deal memory deal = Deal(
             asin,
             seller,
             msg.sender,
@@ -82,9 +83,12 @@ contract Checkout is Ownable, ReentrancyGuard {
             block.timestamp,
             paymentAmount
         );
-        _sales[asin].push(sale);
-        // Update seller balance
+        _deals.push(deal);
+        // Update balance
         _balances[seller] += paymentAmount;
+        // Update counters
+        _sales[seller] += 1;
+        _purchases[msg.sender] += 1;
     }
 
     function withdrawBalance() external nonReentrant {
@@ -102,10 +106,28 @@ contract Checkout is Ownable, ReentrancyGuard {
     /// ***** VIEW FUNCTIONS ******
     /// ***************************
 
-    function getSales(
-        string memory asin
-    ) external view returns (Sale[] memory) {
-        return _sales[asin];
+    function getSales(address seller) external view returns (Deal[] memory) {
+        Deal[] memory deals = new Deal[](_sales[seller]);
+        uint index = 0;
+        for (uint256 i = 0; i < _deals.length; i++) {
+            if (_deals[i].seller == seller) {
+                deals[index] = _deals[i];
+                index += 1;
+            }
+        }
+        return deals;
+    }
+
+    function getPurchases(address buyer) external view returns (Deal[] memory) {
+        Deal[] memory deals = new Deal[](_purchases[buyer]);
+        uint index = 0;
+        for (uint256 i = 0; i < _deals.length; i++) {
+            if (_deals[i].buyer == buyer) {
+                deals[index] = _deals[i];
+                index += 1;
+            }
+        }
+        return deals;
     }
 
     function getBalance(address seller) external view returns (uint) {
