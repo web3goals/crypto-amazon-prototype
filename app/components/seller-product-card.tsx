@@ -40,7 +40,11 @@ export function SellerProductCard(props: {
 
   return (
     <div className="w-full flex flex-col border rounded px-6 py-8">
-      <ProductCardHeader product={props.product} price={props.price} />
+      <ProductCardHeader
+        product={props.product}
+        price={props.price}
+        verifiedSeller={verifiedSeller}
+      />
       <Separator className="my-6" />
       {state === "VERIFICATION_REQUIRED" && (
         <SellerProductCardFooterVerification

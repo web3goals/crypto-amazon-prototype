@@ -26,3 +26,10 @@ export function getTestAmazonAccountProducts(): Product[] {
     },
   ];
 }
+
+// TODO: Use Amazon API to find a product
+export async function findProduct(asin: string): Promise<Product | undefined> {
+  return getTestAmazonAccountProducts().find(
+    (product) => product.asin === asin
+  );
+}

@@ -14,3 +14,17 @@ export function getChainConfigsWithUsdt(): ChainConfig[] {
     (chainConfig) => !isAddressEqual(chainConfig.usdt, zeroAddress)
   );
 }
+
+export function getChainConfigsWithCheckout(): ChainConfig[] {
+  return Object.values(chainConfigs).filter(
+    (chainConfig) =>
+      !isAddressEqual(chainConfig.checkout, zeroAddress) &&
+      chainConfig.checkoutPaymentTokenSymbol.length > 0
+  );
+}
+
+export function getChainConfigById(id: string): ChainConfig | undefined {
+  return Object.values(chainConfigs).find(
+    (chainConfig) => chainConfig.chain.id.toString() === id
+  );
+}
