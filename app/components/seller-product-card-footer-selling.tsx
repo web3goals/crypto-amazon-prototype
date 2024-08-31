@@ -84,10 +84,7 @@ function SellerProductCardFooterSellingForm(props: {
 
   return (
     <div>
-      <div className="flex flex-row gap-2">
-        <p className="text-base font-bold">Set a price for the sale</p>
-        <p className="text-base text-muted-foreground font-bold">(USD)</p>
-      </div>
+      <p className="text-base font-bold">Set a price for the sale (USD)</p>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
           <FormField
