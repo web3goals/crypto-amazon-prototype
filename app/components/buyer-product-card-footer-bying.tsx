@@ -248,7 +248,9 @@ function SellerProductCardFooterBuyingFormConfirm(props: {
   });
 
   const paymentAmount =
-    props.price && chainlinkDataFeedAnswer
+    props.price &&
+    chainlinkDataFeedAnswer &&
+    chainlinkDataFeedAnswer !== BigInt(0)
       ? (props.price / chainlinkDataFeedAnswer) * BigInt(10 ** 8)
       : BigInt(0);
 
