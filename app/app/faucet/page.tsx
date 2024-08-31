@@ -4,11 +4,12 @@ import { usdtAbi } from "@/abi/usdt";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/components/ui/use-toast";
-import { ChainConfig, chainConfigs } from "@/config/chains";
+import { ChainConfig } from "@/config/chains";
 import useError from "@/hooks/useError";
+import { getChainConfigsWithUsdt } from "@/lib/chains";
 import { CoinsIcon, Loader2 } from "lucide-react";
 import { useState } from "react";
-import { isAddressEqual, parseEther, zeroAddress } from "viem";
+import { parseEther } from "viem";
 import { useAccount, usePublicClient, useWalletClient } from "wagmi";
 
 export default function FaucetPage() {
@@ -23,7 +24,7 @@ export default function FaucetPage() {
       </div>
       <Separator className="my-6" />
       <div className="flex flex-col gap-4">
-        {Object.values(chainConfigs).map((chainConfig, index) => (
+        {getChainConfigsWithUsdt().map((chainConfig, index) => (
           <FaucetUsdt key={index} chainConfig={chainConfig} />
         ))}
       </div>
@@ -67,10 +68,6 @@ function FaucetUsdt(props: { chainConfig: ChainConfig }) {
     } finally {
       setMinting(false);
     }
-  }
-
-  if (isAddressEqual(props.chainConfig.usdt, zeroAddress)) {
-    return <></>;
   }
 
   return (
