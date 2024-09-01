@@ -5,7 +5,7 @@ import { Skeleton } from "./ui/skeleton";
  * A component with entity list.
  */
 export default function EntityList(props: {
-  entities: any[] | undefined;
+  entities: any[] | readonly any[] | undefined;
   renderEntityCard: (entity: any, key: number) => ReactNode;
   noEntitiesText: string;
 }) {

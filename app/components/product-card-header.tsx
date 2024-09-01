@@ -3,22 +3,16 @@
 import { getStorefrontChainConfig } from "@/lib/chains";
 import { addressToShortAddress } from "@/lib/converters";
 import { Product } from "@/lib/products";
+import { CheckoutDeal } from "@/types/checkout-deal";
 import { ShieldCheckIcon } from "lucide-react";
 import { Address, formatEther, isAddressEqual, zeroAddress } from "viem";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { ChainConfig } from "@/config/chains";
 
 export function ProductCardHeader(props: {
   product: Product;
   price: bigint | undefined;
   verifiedSeller: Address | undefined;
-  deal?: {
-    buyer: Address;
-    date: bigint;
-    paymentAmount: bigint;
-    paymentTokenSymbol: string;
-    chainConfig: ChainConfig;
-  };
+  deal?: CheckoutDeal;
 }) {
   return (
     <div className="flex flex-col items-start">

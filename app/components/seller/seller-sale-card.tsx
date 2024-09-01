@@ -1,13 +1,12 @@
 "use client";
 
 import { storefrontAbi } from "@/abi/storefront";
-import { ChainConfig } from "@/config/chains";
 import useError from "@/hooks/useError";
 import { getStorefrontChainConfig } from "@/lib/chains";
 import { findProduct, Product } from "@/lib/products";
+import { CheckoutDeal } from "@/types/checkout-deal";
 import { InfoIcon, MessageSquareMoreIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Address } from "viem";
 import { useReadContract } from "wagmi";
 import { ProductCardHeader } from "../product-card-header";
 import { Button } from "../ui/button";
@@ -16,14 +15,7 @@ import { Skeleton } from "../ui/skeleton";
 import { toast } from "../ui/use-toast";
 
 export function SellerSaleCard(props: {
-  deal: {
-    asin: string;
-    buyer: Address;
-    date: bigint;
-    paymentAmount: bigint;
-    paymentTokenSymbol: string;
-    chainConfig: ChainConfig;
-  };
+  deal: CheckoutDeal;
   price: bigint | undefined;
 }) {
   const { handleError } = useError();
@@ -56,13 +48,7 @@ export function SellerSaleCard(props: {
         product={product}
         price={props.price}
         verifiedSeller={verifiedSeller}
-        deal={{
-          buyer: props.deal.buyer,
-          date: props.deal.date,
-          paymentAmount: props.deal.paymentAmount,
-          paymentTokenSymbol: props.deal.paymentTokenSymbol,
-          chainConfig: props.deal.chainConfig,
-        }}
+        deal={props.deal}
       />
       <Separator className="my-6" />
       {/* TODO: Implement buttons */}

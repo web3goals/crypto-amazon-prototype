@@ -49,14 +49,17 @@ function BuyerPurchasesByChain(props: { chainConfig: ChainConfig }) {
 
   return (
     <EntityList
-      entities={purchases as any[]}
+      entities={purchases}
       renderEntityCard={(purchase, index) => {
         return (
           <BuyerPurchaseCard
             key={index}
             deal={{
               asin: purchase.asin,
+              seller: purchase.asin,
               buyer: purchase.buyer,
+              buyerName: purchase.buyerName,
+              buyerAddress: purchase.buyerAddress,
               date: purchase.date,
               paymentAmount: purchase.paymentAmount,
               paymentTokenSymbol: paymentTokenSymbol || "",

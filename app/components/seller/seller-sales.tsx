@@ -56,7 +56,10 @@ function SellerSalesByChain(props: { chainConfig: ChainConfig }) {
             key={index}
             deal={{
               asin: sale.asin,
+              seller: sale.seller,
               buyer: sale.buyer,
+              buyerName: sale.buyerName,
+              buyerAddress: sale.buyerAddress,
               date: sale.date,
               paymentAmount: sale.paymentAmount,
               paymentTokenSymbol: paymentTokenSymbol || "",
