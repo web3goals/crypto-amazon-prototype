@@ -56,7 +56,7 @@ function BuyerPurchasesByChain(props: { chainConfig: ChainConfig }) {
             key={index}
             deal={{
               asin: purchase.asin,
-              seller: purchase.asin,
+              seller: purchase.seller,
               buyer: purchase.buyer,
               buyerName: purchase.buyerName,
               buyerAddress: purchase.buyerAddress,

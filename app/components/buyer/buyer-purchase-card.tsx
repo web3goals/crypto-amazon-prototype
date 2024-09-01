@@ -13,6 +13,7 @@ import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 import { toast } from "../ui/use-toast";
+import Link from "next/link";
 
 export function BuyerPurchaseCard(props: {
   deal: CheckoutDeal;
@@ -51,15 +52,17 @@ export function BuyerPurchaseCard(props: {
         deal={props.deal}
       />
       <Separator className="my-6" />
-      {/* TODO: Implement buttons */}
       <div className="flex flex-row gap-2">
-        <Button
-          variant="default"
-          onClick={() => toast({ title: "Not implemented yet 😬" })}
+        <Link
+          href={`https://app.converse.xyz/conversation?mainConversationWithPeer=${props.deal.seller}`}
+          target="_blank"
         >
-          <MessageSquareMoreIcon className="mr-2 h-4 w-4" />
-          Contact Seller
-        </Button>
+          <Button variant="default">
+            <MessageSquareMoreIcon className="mr-2 h-4 w-4" />
+            Contact Seller
+          </Button>
+        </Link>
+        {/* TODO: Implement button */}
         <Button
           variant="secondary"
           onClick={() => toast({ title: "Not implemented yet 😬" })}
