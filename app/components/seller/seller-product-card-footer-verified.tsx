@@ -6,17 +6,18 @@ import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 
 export function SellerProductCardFooterVerified(props: { product: Product }) {
-  const [state, setState] = useState<"SELLING" | "SUMMARIZING" | undefined>();
+  const [sellingChosen, setSellingChoosen] = useState(false);
 
-  if (state === "SELLING") {
+  if (sellingChosen) {
     return <SellerProductCardFooterSelling product={props.product} />;
   }
 
   return (
     <div className="flex flex-rol gap-2">
-      <Button variant="default" onClick={() => setState("SELLING")}>
+      <Button variant="default" onClick={() => setSellingChoosen(true)}>
         <CircleDollarSignIcon className="mr-2 h-4 w-4" /> Sell
       </Button>
+      {/* TODO: Implement */}
       <Button
         variant="secondary"
         onClick={() => toast({ title: "Not implemented yet 😬" })}

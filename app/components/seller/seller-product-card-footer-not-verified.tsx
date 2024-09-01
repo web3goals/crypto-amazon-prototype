@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useAccount, usePublicClient, useWalletClient } from "wagmi";
 import { Button } from "../ui/button";
 
-export function SellerProductCardFooterVerification(props: {
+export function SellerProductCardFooterNotVerified(props: {
   product: Product;
   sellerAmazonToken: string;
 }) {

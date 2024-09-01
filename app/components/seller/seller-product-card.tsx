@@ -7,9 +7,9 @@ import { useEffect, useState } from "react";
 import { isAddressEqual } from "viem";
 import { useAccount, useReadContract } from "wagmi";
 import { ProductCardHeader } from "../product-card-header";
-import { SellerProductCardFooterVerification } from "./seller-product-card-footer-verification";
-import { SellerProductCardFooterVerified } from "./seller-product-card-footer-verified";
 import { Separator } from "../ui/separator";
+import { SellerProductCardFooterNotVerified } from "./seller-product-card-footer-not-verified";
+import { SellerProductCardFooterVerified } from "./seller-product-card-footer-verified";
 
 export function SellerProductCard(props: {
   product: Product;
@@ -17,9 +17,7 @@ export function SellerProductCard(props: {
   sellerAmazonToken: string;
 }) {
   const { address } = useAccount();
-  const [state, setState] = useState<
-    "VERIFICATION_REQUIRED" | "VERIFIED" | undefined
-  >();
+  const [verified, setVerified] = useState<boolean | undefined>();
 
   const { data: verifiedSeller } = useReadContract({
     address: getStorefrontChainConfig().storefront,
@@ -31,10 +29,10 @@ export function SellerProductCard(props: {
 
   useEffect(() => {
     if (verifiedSeller && address && !isAddressEqual(verifiedSeller, address)) {
-      setState("VERIFICATION_REQUIRED");
+      setVerified(false);
     }
     if (verifiedSeller && address && isAddressEqual(verifiedSeller, address)) {
-      setState("VERIFIED");
+      setVerified(true);
     }
   }, [verifiedSeller, address]);
 
@@ -46,13 +44,13 @@ export function SellerProductCard(props: {
         verifiedSeller={verifiedSeller}
       />
       <Separator className="my-6" />
-      {state === "VERIFICATION_REQUIRED" && (
-        <SellerProductCardFooterVerification
+      {verified === true && (
+        <SellerProductCardFooterNotVerified
           product={props.product}
           sellerAmazonToken={props.sellerAmazonToken}
         />
       )}
-      {state === "VERIFIED" && (
+      {verified === false && (
         <SellerProductCardFooterVerified product={props.product} />
       )}
     </div>
