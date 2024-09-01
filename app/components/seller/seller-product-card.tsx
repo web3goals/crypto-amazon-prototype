@@ -44,13 +44,13 @@ export function SellerProductCard(props: {
         verifiedSeller={verifiedSeller}
       />
       <Separator className="my-6" />
-      {verified === true && (
+      {verified === false && (
         <SellerProductCardFooterNotVerified
           product={props.product}
           sellerAmazonToken={props.sellerAmazonToken}
         />
       )}
-      {verified === false && (
+      {verified === true && (
         <SellerProductCardFooterVerified product={props.product} />
       )}
     </div>
