@@ -44,7 +44,8 @@ async function main() {
   ) {
     const contractFactory = await ethers.getContractFactory("Checkout");
     const contract = await contractFactory.deploy(
-      CONTRACTS[network].chainlinkDataFeed,
+      CONTRACTS[network].chainlinkDataFeed.address,
+      CONTRACTS[network].chainlinkDataFeed.customAnswer,
       CONTRACTS[network].usdt
     );
     await contract.waitForDeployment();

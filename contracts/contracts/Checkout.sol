@@ -25,12 +25,13 @@ contract Checkout is Ownable, ReentrancyGuard {
     mapping(address seller => uint256 sales) _sales;
     mapping(address buyer => uint256 purchases) _purchases;
 
-    // TODO: Add customChainlinkDataFeedAnswer
     constructor(
         address chainlinkDataFeed,
+        int customChainlinkDataFeedAnswer,
         address paymentToken
     ) Ownable(msg.sender) {
         _chainlinkDataFeed = AggregatorV3Interface(chainlinkDataFeed);
+        _customChainlinkDataFeedAnswer = customChainlinkDataFeedAnswer;
         _paymentToken = IERC20(paymentToken);
     }
 

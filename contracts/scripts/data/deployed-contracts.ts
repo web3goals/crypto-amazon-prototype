@@ -10,7 +10,12 @@ export const CONTRACTS: {
           source: string;
         }
       | undefined;
-    chainlinkDataFeed: `0x${string}` | undefined;
+    chainlinkDataFeed:
+      | {
+          address: `0x${string}`;
+          customAnswer: string;
+        }
+      | undefined;
     signProtocol:
       | {
           address: `0x${string}`;
@@ -30,7 +35,10 @@ export const CONTRACTS: {
       subscriptionId: 225,
       source: CHAINLINK_SOURCE,
     },
-    chainlinkDataFeed: "0xF83696ca1b8a266163bE252bE2B94702D4929392",
+    chainlinkDataFeed: {
+      address: "0xF83696ca1b8a266163bE252bE2B94702D4929392",
+      customAnswer: "100000000",
+    },
     signProtocol: {
       address: "0x4e4af2a21ebf62850fD99Eb6253E1eFBb56098cD",
       schemaId: "0x5",

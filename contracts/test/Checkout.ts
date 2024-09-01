@@ -12,6 +12,7 @@ describe("Checkout", function () {
     const checkoutContractFactory = await ethers.getContractFactory("Checkout");
     const checkoutContract = await checkoutContractFactory.deploy(
       ethers.ZeroAddress,
+      "0",
       usdTokenContract
     );
     // Mint USD tokens
