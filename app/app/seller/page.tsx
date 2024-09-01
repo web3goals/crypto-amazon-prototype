@@ -1,4 +1,4 @@
-import { SellerProducts } from "@/components/seller/seller-products";
+import { SellerAccountChooser } from "@/components/seller/seller-products";
 import { Separator } from "@/components/ui/separator";
 
 export default function SellerPage() {
@@ -11,7 +11,7 @@ export default function SellerPage() {
         </p>
       </div>
       <Separator className="my-6" />
-      <SellerProducts />
+      <SellerAccountChooser />
     </main>
   );
 }

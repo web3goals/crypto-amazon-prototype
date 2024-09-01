@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import EntityList from "../entity-list";
 import { SellerProductCard } from "./seller-product-card";
 
-export function SellerProductsTestAmazonAccount() {
+export function SellerProductsAccountTest() {
   const sellerAmazonToken = "TEST_TOKEN";
   const [products, setProducts] = useState<Product[] | undefined>();
   const { prices } = usePrices();

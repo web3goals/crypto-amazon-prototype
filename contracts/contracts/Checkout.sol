@@ -25,6 +25,7 @@ contract Checkout is Ownable, ReentrancyGuard {
     mapping(address seller => uint256 sales) _sales;
     mapping(address buyer => uint256 purchases) _purchases;
 
+    // TODO: Add customChainlinkDataFeedAnswer
     constructor(
         address chainlinkDataFeed,
         address paymentToken
