@@ -5,7 +5,8 @@ import useError from "@/hooks/useError";
 import { getStorefrontChainConfig } from "@/lib/chains";
 import { findProduct, Product } from "@/lib/products";
 import { CheckoutDeal } from "@/types/checkout-deal";
-import { InfoIcon, MessageSquareMoreIcon } from "lucide-react";
+import { InfoIcon, MessagesSquareIcon } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useReadContract } from "wagmi";
 import { ProductCardHeader } from "../product-card-header";
@@ -13,7 +14,6 @@ import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 import { toast } from "../ui/use-toast";
-import Link from "next/link";
 
 export function SellerSaleCard(props: {
   deal: CheckoutDeal;
@@ -59,7 +59,7 @@ export function SellerSaleCard(props: {
           target="_blank"
         >
           <Button variant="default">
-            <MessageSquareMoreIcon className="mr-2 h-4 w-4" /> Contact Buyer
+            <MessagesSquareIcon className="mr-2 h-4 w-4" /> Contact Buyer
           </Button>
         </Link>
         {/* TODO: Implement button */}

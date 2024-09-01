@@ -7,6 +7,7 @@ import {
   GithubIcon,
   HandshakeIcon,
   MenuIcon,
+  MessagesSquareIcon,
   SearchIcon,
   ShoppingBasketIcon,
   StoreIcon,
@@ -95,6 +96,12 @@ export function SiteHeader() {
                 <DropdownMenuItem>
                   <CoinsIcon className="mr-2 h-4 w-4" />
                   <span>Faucet</span>
+                </DropdownMenuItem>
+              </Link>
+              <Link href="https://app.converse.xyz/" target="_blank">
+                <DropdownMenuItem>
+                  <MessagesSquareIcon className="mr-2 h-4 w-4" />
+                  <span>Converse</span>
                 </DropdownMenuItem>
               </Link>
               <Link href={siteConfig.links.github} target="_blank">
