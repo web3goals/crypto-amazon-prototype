@@ -13,9 +13,15 @@ import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import { useAccount, usePublicClient, useWalletClient } from "wagmi";
 import { z } from "zod";
-import { Button } from "./ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
-import { Input } from "./ui/input";
+import { Button } from "../ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../ui/form";
+import { Input } from "../ui/input";
 
 export function SellerProductCardFooterSelling(props: { product: Product }) {
   const [listed, setListed] = useState(false);

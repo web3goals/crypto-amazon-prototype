@@ -2,8 +2,8 @@ import { Product } from "@/lib/products";
 import { CircleDollarSignIcon, WandSparklesIcon } from "lucide-react";
 import { useState } from "react";
 import { SellerProductCardFooterSelling } from "./seller-product-card-footer-selling";
-import { Button } from "./ui/button";
-import { toast } from "./ui/use-toast";
+import { Button } from "../ui/button";
+import { toast } from "../ui/use-toast";
 
 export function SellerProductCardFooterVerified(props: { product: Product }) {
   const [state, setState] = useState<"SELLING" | "SUMMARIZING" | undefined>();

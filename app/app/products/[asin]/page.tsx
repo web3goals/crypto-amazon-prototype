@@ -1,6 +1,6 @@
 "use client";
 
-import { BuyerProductCard } from "@/components/buyer-product-card";
+import { BuyerProductCard } from "@/components/buyer/buyer-product-card";
 import EntityList from "@/components/entity-list";
 import { Separator } from "@/components/ui/separator";
 import useError from "@/hooks/useError";

@@ -7,7 +7,7 @@ import { Product } from "@/lib/products";
 import { Loader2, ShieldCheckIcon } from "lucide-react";
 import { useState } from "react";
 import { useAccount, usePublicClient, useWalletClient } from "wagmi";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 export function SellerProductCardFooterVerification(props: {
   product: Product;

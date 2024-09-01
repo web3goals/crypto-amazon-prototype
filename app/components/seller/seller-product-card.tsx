@@ -6,10 +6,10 @@ import { Product } from "@/lib/products";
 import { useEffect, useState } from "react";
 import { isAddressEqual } from "viem";
 import { useAccount, useReadContract } from "wagmi";
-import { ProductCardHeader } from "./product-card-header";
+import { ProductCardHeader } from "../product-card-header";
 import { SellerProductCardFooterVerification } from "./seller-product-card-footer-verification";
 import { SellerProductCardFooterVerified } from "./seller-product-card-footer-verified";
-import { Separator } from "./ui/separator";
+import { Separator } from "../ui/separator";
 
 export function SellerProductCard(props: {
   product: Product;

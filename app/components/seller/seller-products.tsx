@@ -3,8 +3,8 @@
 import { UserCogIcon, UserIcon } from "lucide-react";
 import { useState } from "react";
 import { SellerProductsTestAmazonAccount } from "./seller-products-test-amazon-account";
-import { Button } from "./ui/button";
-import { useToast } from "./ui/use-toast";
+import { Button } from "../ui/button";
+import { useToast } from "../ui/use-toast";
 
 export function SellerProducts() {
   const { toast } = useToast();

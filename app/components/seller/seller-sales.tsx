@@ -6,7 +6,7 @@ import usePrices from "@/hooks/usePrices";
 import { getChainConfigsWithCheckout } from "@/lib/chains";
 import { erc20Abi, zeroAddress } from "viem";
 import { useAccount, useReadContract } from "wagmi";
-import EntityList from "./entity-list";
+import EntityList from "../entity-list";
 import { SellerSaleCard } from "./seller-sale-card";
 
 export function SellerSales() {

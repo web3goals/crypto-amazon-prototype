@@ -1,4 +1,4 @@
-import { SellerSales } from "@/components/seller-sales";
+import { SellerSales } from "@/components/seller/seller-sales";
 import { Separator } from "@/components/ui/separator";
 
 export default function SellerSalesPage() {

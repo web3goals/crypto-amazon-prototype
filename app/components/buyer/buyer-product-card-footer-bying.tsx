@@ -16,7 +16,7 @@ import { useState } from "react";
 import Confetti from "react-confetti";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
@@ -25,16 +25,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
-import { Input } from "./ui/input";
+} from "../ui/form";
+import { Input } from "../ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { Skeleton } from "./ui/skeleton";
+} from "../ui/select";
+import { Skeleton } from "../ui/skeleton";
 import { Address, erc20Abi, formatEther, maxUint256 } from "viem";
 import { checkoutAbi } from "@/abi/checkout";
 import {

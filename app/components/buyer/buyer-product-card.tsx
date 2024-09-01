@@ -2,9 +2,9 @@
 
 import { Product } from "@/lib/products";
 import { useState } from "react";
-import { ProductCardHeader } from "./product-card-header";
-import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
+import { ProductCardHeader } from "../product-card-header";
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
 import { ShoppingCartIcon } from "lucide-react";
 import { BuyerProductCardFooterBuying } from "./buyer-product-card-footer-bying";
 import { storefrontAbi } from "@/abi/storefront";

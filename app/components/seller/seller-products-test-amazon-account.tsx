@@ -3,7 +3,7 @@
 import usePrices from "@/hooks/usePrices";
 import { getTestAmazonAccountProducts, Product } from "@/lib/products";
 import { useEffect, useState } from "react";
-import EntityList from "./entity-list";
+import EntityList from "../entity-list";
 import { SellerProductCard } from "./seller-product-card";
 
 export function SellerProductsTestAmazonAccount() {
