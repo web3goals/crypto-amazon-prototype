@@ -1,15 +1,18 @@
 "use client";
 
 import { storefrontAbi } from "@/abi/storefront";
+import { ChainConfig } from "@/config/chains";
+import useError from "@/hooks/useError";
 import { getStorefrontChainConfig } from "@/lib/chains";
 import { findProduct, Product } from "@/lib/products";
+import { useEffect, useState } from "react";
+import { Address } from "viem";
 import { useReadContract } from "wagmi";
 import { ProductCardHeader } from "../product-card-header";
-import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
-import useError from "@/hooks/useError";
-import { ChainConfig } from "@/config/chains";
-import { Address } from "viem";
+import { toast } from "../ui/use-toast";
+import { Separator } from "../ui/separator";
 
 export function SellerSaleCard(props: {
   deal: {
@@ -60,7 +63,22 @@ export function SellerSaleCard(props: {
           chainConfig: props.deal.chainConfig,
         }}
       />
-      {/* TODO: Add footer */}
+      <Separator className="my-6" />
+      {/* TODO: Implement buttons */}
+      <div className="flex flex-row gap-2">
+        <Button
+          variant="default"
+          onClick={() => toast({ title: "Not implemented yet 😬" })}
+        >
+          Contact Buyer
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => toast({ title: "Not implemented yet 😬" })}
+        >
+          Open Details
+        </Button>
+      </div>
     </div>
   );
 }
