@@ -5,14 +5,15 @@ import { ChainConfig } from "@/config/chains";
 import useError from "@/hooks/useError";
 import { getStorefrontChainConfig } from "@/lib/chains";
 import { findProduct, Product } from "@/lib/products";
+import { InfoIcon, MessageSquareMoreIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Address } from "viem";
 import { useReadContract } from "wagmi";
 import { ProductCardHeader } from "../product-card-header";
 import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 import { toast } from "../ui/use-toast";
-import { Separator } from "../ui/separator";
 
 export function SellerSaleCard(props: {
   deal: {
@@ -70,12 +71,13 @@ export function SellerSaleCard(props: {
           variant="default"
           onClick={() => toast({ title: "Not implemented yet 😬" })}
         >
-          Contact Buyer
+          <MessageSquareMoreIcon className="mr-2 h-4 w-4" /> Contact Buyer
         </Button>
         <Button
           variant="secondary"
           onClick={() => toast({ title: "Not implemented yet 😬" })}
         >
+          <InfoIcon className="mr-2 h-4 w-4" />
           Open Details
         </Button>
       </div>

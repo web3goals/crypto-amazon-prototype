@@ -1,18 +1,19 @@
 "use client";
 
+import { storefrontAbi } from "@/abi/storefront";
 import { ChainConfig } from "@/config/chains";
 import useError from "@/hooks/useError";
+import { getStorefrontChainConfig } from "@/lib/chains";
 import { findProduct, Product } from "@/lib/products";
+import { InfoIcon, MessageSquareMoreIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Address } from "viem";
-import { Skeleton } from "../ui/skeleton";
-import { storefrontAbi } from "@/abi/storefront";
-import { getStorefrontChainConfig } from "@/lib/chains";
 import { useReadContract } from "wagmi";
 import { ProductCardHeader } from "../product-card-header";
 import { Button } from "../ui/button";
-import { toast } from "../ui/use-toast";
 import { Separator } from "../ui/separator";
+import { Skeleton } from "../ui/skeleton";
+import { toast } from "../ui/use-toast";
 
 export function BuyerPurchaseCard(props: {
   deal: {
@@ -70,13 +71,14 @@ export function BuyerPurchaseCard(props: {
           variant="default"
           onClick={() => toast({ title: "Not implemented yet 😬" })}
         >
+          <MessageSquareMoreIcon className="mr-2 h-4 w-4" />
           Contact Seller
         </Button>
         <Button
           variant="secondary"
           onClick={() => toast({ title: "Not implemented yet 😬" })}
         >
-          Open Details
+          <InfoIcon className="mr-2 h-4 w-4" /> Open Details
         </Button>
       </div>
     </div>
