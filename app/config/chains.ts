@@ -9,6 +9,7 @@ export type ChainConfig = {
   checkoutPaymentTokenSymbol: string; // TODO: Load this data using checkout contract
   signProtocolApi: string;
   signProtocolSchemaId: string;
+  indexer: string;
 };
 
 export const chainConfigs = {
@@ -20,6 +21,7 @@ export const chainConfigs = {
     checkoutPaymentTokenSymbol: "USDT",
     signProtocolApi: "https://testnet-rpc.sign.global/api",
     signProtocolSchemaId: "onchain_evm_11155420_0x5",
+    indexer: "http://localhost:8080/v1/graphql",
   } as ChainConfig,
   morphHolesky: {
     chain: morphHolesky,
@@ -29,5 +31,6 @@ export const chainConfigs = {
     checkoutPaymentTokenSymbol: "",
     signProtocolApi: "",
     signProtocolSchemaId: "",
+    indexer: "",
   } as ChainConfig,
 };

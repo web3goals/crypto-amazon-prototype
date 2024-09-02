@@ -3,27 +3,14 @@
 import { BuyerProductCard } from "@/components/buyer/buyer-product-card";
 import EntityList from "@/components/entity-list";
 import { Separator } from "@/components/ui/separator";
-import useError from "@/hooks/useError";
+import useListedProductFinder from "@/hooks/useListedProductsFinder";
 import usePrices from "@/hooks/usePrices";
-import { findProduct, Product } from "@/lib/products";
-import { useEffect, useState } from "react";
+import useProductFinder from "@/hooks/useProductFinder";
 
 export default function ProductPage({ params }: { params: { asin: string } }) {
-  const { handleError } = useError();
-  const [products, setProducts] = useState<Product[] | undefined>();
+  const { listedProduct } = useListedProductFinder(params.asin);
+  const { product } = useProductFinder(listedProduct?.asin);
   const { prices } = usePrices();
-
-  // TODO: Use indexer to find listed product
-  useEffect(() => {
-    findProduct(params.asin)
-      .then((product) => {
-        product ? setProducts([product]) : setProducts([]);
-      })
-      .catch((error) => {
-        handleError(error, true);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.asin]);
 
   return (
     <main className="container py-10 lg:px-80">
@@ -33,7 +20,7 @@ export default function ProductPage({ params }: { params: { asin: string } }) {
       </div>
       <Separator className="my-6" />
       <EntityList
-        entities={products}
+        entities={product ? [product] : []}
         renderEntityCard={(product, index) => (
           <BuyerProductCard
             key={index}
