@@ -10,7 +10,7 @@ Connect your Amazon seller account and start accepting crypto payments in a few 
 
 ...
 
-## 🛠️ Technologies
+## 🚀 Technologies
 
 ...
 
