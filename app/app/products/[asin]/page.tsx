@@ -4,13 +4,13 @@ import { BuyerProductCard } from "@/components/buyer/buyer-product-card";
 import EntityList from "@/components/entity-list";
 import { Separator } from "@/components/ui/separator";
 import useListedProductsFinder from "@/hooks/useListedProductsFinder";
-import usePrices from "@/hooks/usePrices";
+import usePricesLoader from "@/hooks/usePricesLoader";
 import useProductsFinder from "@/hooks/useProductsFinder";
 
 export default function ProductPage({ params }: { params: { asin: string } }) {
   const { listedProducts } = useListedProductsFinder(params.asin);
   const { products } = useProductsFinder(listedProducts?.[0]?.asin);
-  const { prices } = usePrices();
+  const { prices } = usePricesLoader();
 
   return (
     <main className="container py-10 lg:px-80">

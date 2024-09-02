@@ -1,7 +1,7 @@
 "use client";
 
 import { testSellerAccountConfig } from "@/config/test-seller-account";
-import usePrices from "@/hooks/usePrices";
+import usePricesLoader from "@/hooks/usePricesLoader";
 import { Product } from "@/lib/products";
 import { useEffect, useState } from "react";
 import EntityList from "../entity-list";
@@ -9,7 +9,7 @@ import { SellerProductCard } from "./seller-product-card";
 
 export function SellerProductsAccountTest() {
   const [products, setProducts] = useState<Product[] | undefined>();
-  const { prices } = usePrices();
+  const { prices } = usePricesLoader();
 
   useEffect(() => {
     new Promise((resolve) => setTimeout(resolve, 1000)).then(() =>

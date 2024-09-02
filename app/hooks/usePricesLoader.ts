@@ -4,8 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { decodeAbiParameters } from "viem";
 
-// TODO: Rename to "usePricesLoader"
-export default function usePrices() {
+export default function usePricesLoader() {
   const [prices, setPrices] = useState<Map<string, bigint> | undefined>();
 
   function dataToPrices(data: any): Map<string, bigint> {

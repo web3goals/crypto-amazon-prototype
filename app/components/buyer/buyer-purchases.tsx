@@ -2,7 +2,7 @@
 
 import { checkoutAbi } from "@/abi/checkout";
 import { ChainConfig } from "@/config/chains";
-import usePrices from "@/hooks/usePrices";
+import usePricesLoader from "@/hooks/usePricesLoader";
 import { getChainConfigsWithCheckout } from "@/lib/chains";
 import { erc20Abi, zeroAddress } from "viem";
 import { useAccount, useReadContract } from "wagmi";
@@ -21,7 +21,7 @@ export function BuyerPurchases() {
 
 function BuyerPurchasesByChain(props: { chainConfig: ChainConfig }) {
   const { address } = useAccount();
-  const { prices } = usePrices();
+  const { prices } = usePricesLoader();
 
   const { data: purchases } = useReadContract({
     address: props.chainConfig.checkout,
