@@ -1,13 +1,11 @@
 "use client";
 
 import { storefrontAbi } from "@/abi/storefront";
-import useError from "@/hooks/useError";
+import useProductFinder from "@/hooks/useProductFinder";
 import { getStorefrontChainConfig } from "@/lib/chains";
-import { findProduct, Product } from "@/lib/products";
 import { CheckoutDeal } from "@/types/checkout-deal";
 import { MessagesSquareIcon } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useReadContract } from "wagmi";
 import { ProductCardHeader } from "../product/product-card-header";
 import { Button } from "../ui/button";
@@ -19,8 +17,7 @@ export function BuyerPurchaseCard(props: {
   deal: CheckoutDeal;
   price: bigint | undefined;
 }) {
-  const { handleError } = useError();
-  const [product, setProduct] = useState<Product | undefined>();
+  const { product } = useProductFinder(props.deal.asin);
 
   const { data: verifiedSeller } = useReadContract({
     address: getStorefrontChainConfig().storefront,
@@ -29,15 +26,6 @@ export function BuyerPurchaseCard(props: {
     args: [props.deal.asin],
     chainId: getStorefrontChainConfig().chain.id,
   });
-
-  useEffect(() => {
-    findProduct(props.deal.asin)
-      .then((product) => setProduct(product))
-      .catch((error) => {
-        handleError(error, true);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.deal.asin]);
 
   if (!product) {
     return <Skeleton className="w-4" />;
