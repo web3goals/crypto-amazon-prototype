@@ -3,13 +3,13 @@
 import { BuyerProductCard } from "@/components/buyer/buyer-product-card";
 import EntityList from "@/components/entity-list";
 import { Separator } from "@/components/ui/separator";
-import useListedProductFinder from "@/hooks/useListedProductsFinder";
+import useListedProductsFinder from "@/hooks/useListedProductsFinder";
 import usePrices from "@/hooks/usePrices";
-import useProductFinder from "@/hooks/useProductFinder";
+import useProductsFinder from "@/hooks/useProductsFinder";
 
 export default function ProductPage({ params }: { params: { asin: string } }) {
-  const { listedProduct } = useListedProductFinder(params.asin);
-  const { product } = useProductFinder(listedProduct?.asin);
+  const { listedProducts } = useListedProductsFinder(params.asin);
+  const { products } = useProductsFinder(listedProducts?.[0]?.asin);
   const { prices } = usePrices();
 
   return (
@@ -20,7 +20,7 @@ export default function ProductPage({ params }: { params: { asin: string } }) {
       </div>
       <Separator className="my-6" />
       <EntityList
-        entities={product ? [product] : []}
+        entities={products}
         renderEntityCard={(product, index) => (
           <BuyerProductCard
             key={index}

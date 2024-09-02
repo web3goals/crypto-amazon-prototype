@@ -2,8 +2,8 @@ import { testSellerAccountConfig } from "@/config/test-seller-account";
 import { Product } from "@/lib/products";
 import { useEffect, useState } from "react";
 
-export default function useProductFinder(asin?: string) {
-  const [product, setProduct] = useState<Product | undefined>();
+export default function useProductsFinder(asin?: string) {
+  const [products, setProducts] = useState<Product[] | undefined>();
 
   // TODO: Use Amazon API to find a product
   useEffect(() => {
@@ -11,10 +11,12 @@ export default function useProductFinder(asin?: string) {
       const product = testSellerAccountConfig.products.find(
         (product) => product.asin === asin
       );
-      setProduct(product);
+      setProducts(product ? [product] : []);
+    } else {
+      setProducts([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asin]);
 
-  return { product };
+  return { products };
 }

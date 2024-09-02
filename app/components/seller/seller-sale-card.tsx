@@ -1,7 +1,7 @@
 "use client";
 
 import { storefrontAbi } from "@/abi/storefront";
-import useProductFinder from "@/hooks/useProductFinder";
+import useProductsFinder from "@/hooks/useProductsFinder";
 import { getStorefrontChainConfig } from "@/lib/chains";
 import { CheckoutDeal } from "@/types/checkout-deal";
 import { InfoIcon, MessagesSquareIcon } from "lucide-react";
@@ -17,7 +17,7 @@ export function SellerSaleCard(props: {
   deal: CheckoutDeal;
   price: bigint | undefined;
 }) {
-  const { product } = useProductFinder(props.deal.asin);
+  const { products } = useProductsFinder(props.deal.asin);
 
   const { data: verifiedSeller } = useReadContract({
     address: getStorefrontChainConfig().storefront,
@@ -27,14 +27,14 @@ export function SellerSaleCard(props: {
     chainId: getStorefrontChainConfig().chain.id,
   });
 
-  if (!product) {
+  if (!products || products.length == 0) {
     return <Skeleton className="w-4" />;
   }
 
   return (
     <div className="w-full flex flex-col border rounded px-6 py-8">
       <ProductCardHeader
-        product={product}
+        product={products[0]}
         price={props.price}
         verifiedSeller={verifiedSeller}
         deal={props.deal}

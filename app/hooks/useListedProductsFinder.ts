@@ -4,9 +4,9 @@ import { ListedProduct } from "@/types/listed-product";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function useListedProductFinder(asin?: string) {
-  const [listedProduct, setListedProduct] = useState<
-    ListedProduct | undefined
+export default function useListedProductsFinder(asin?: string) {
+  const [listedProducts, setListedProducts] = useState<
+    ListedProduct[] | undefined
   >();
 
   useEffect(() => {
@@ -29,20 +29,18 @@ export default function useListedProductFinder(asin?: string) {
           { headers: { "x-hasura-admin-secret": "testing" } }
         )
         .then(({ data }) => {
-          const listedProducts: ListedProduct[] =
-            data.data.Storefront_ProductListed;
-          setListedProduct(
-            listedProducts.length > 0 ? listedProducts[0] : undefined
-          );
+          setListedProducts(data.data.Storefront_ProductListed);
         })
         .catch((error) => {
           console.error(
             `Failed to find listed product by '${asin}':` + errorToString(error)
           );
         });
+    } else {
+      setListedProducts([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asin]);
 
-  return { listedProduct };
+  return { listedProducts };
 }
