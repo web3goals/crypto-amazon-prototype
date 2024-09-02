@@ -1,5 +1,5 @@
 import assert from "assert";
-import { TestHelpers, Storefront_ProductListed } from "../generated";
+import { TestHelpers, Storefront_ProductListed } from "generated";
 const { MockDb, Storefront } = TestHelpers;
 
 describe("Storefront contract ProductListed event tests", () => {
