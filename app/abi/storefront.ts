@@ -147,6 +147,31 @@ export const storefrontAbi = [
     inputs: [
       {
         indexed: true,
+        internalType: "string",
+        name: "asin",
+        type: "string",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "seller",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    name: "ProductListed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
         internalType: "bytes32",
         name: "id",
         type: "bytes32",
