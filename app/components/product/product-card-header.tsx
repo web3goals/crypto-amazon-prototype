@@ -6,7 +6,7 @@ import { Product } from "@/lib/products";
 import { CheckoutDeal } from "@/types/checkout-deal";
 import { ShieldCheckIcon } from "lucide-react";
 import { Address, formatEther, isAddressEqual, zeroAddress } from "viem";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export function ProductCardHeader(props: {
   product: Product;

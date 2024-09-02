@@ -1,4 +1,4 @@
-import { ProductSearchForm } from "@/components/product-search-form";
+import { ProductSearchForm } from "@/components/product/product-search-form";
 import { Separator } from "@/components/ui/separator";
 
 export default function ProductSearchPage() {

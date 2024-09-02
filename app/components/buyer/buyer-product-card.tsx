@@ -2,7 +2,7 @@
 
 import { Product } from "@/lib/products";
 import { useState } from "react";
-import { ProductCardHeader } from "../product-card-header";
+import { ProductCardHeader } from "../product/product-card-header";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { ShoppingCartIcon } from "lucide-react";

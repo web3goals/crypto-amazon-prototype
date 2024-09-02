@@ -9,7 +9,7 @@ import { InfoIcon, MessagesSquareIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useReadContract } from "wagmi";
-import { ProductCardHeader } from "../product-card-header";
+import { ProductCardHeader } from "../product/product-card-header";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";

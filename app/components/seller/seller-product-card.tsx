@@ -6,7 +6,7 @@ import { Product } from "@/lib/products";
 import { useEffect, useState } from "react";
 import { isAddressEqual } from "viem";
 import { useAccount, useReadContract } from "wagmi";
-import { ProductCardHeader } from "../product-card-header";
+import { ProductCardHeader } from "../product/product-card-header";
 import { Separator } from "../ui/separator";
 import { SellerProductCardFooterNotVerified } from "./seller-product-card-footer-not-verified";
 import { SellerProductCardFooterVerified } from "./seller-product-card-footer-verified";
