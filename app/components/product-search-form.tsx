@@ -18,7 +18,7 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 
-export function SearchForm() {
+export function ProductSearchForm() {
   const { handleError } = useError();
   const router = useRouter();
   const [searching, setSearching] = useState(false);

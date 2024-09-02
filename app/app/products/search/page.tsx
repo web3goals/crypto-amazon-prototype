@@ -1,7 +1,7 @@
-import { SearchForm } from "@/components/search-form";
+import { ProductSearchForm } from "@/components/product-search-form";
 import { Separator } from "@/components/ui/separator";
 
-export default function SearchPage() {
+export default function ProductSearchPage() {
   return (
     <main className="container py-10 lg:px-80">
       <div className="space-y-0.5">
@@ -11,7 +11,7 @@ export default function SearchPage() {
         </p>
       </div>
       <Separator className="my-6" />
-      <SearchForm />
+      <ProductSearchForm />
     </main>
   );
 }
