@@ -1,0 +1,6 @@
+type Storefront_ProductListed {
+  id: ID!
+  asin: String!
+  seller: String!
+  price: BigInt!
+}

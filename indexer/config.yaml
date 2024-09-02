@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=./node_modules/envio/evm.schema.json
+name: crypto_amazon_indexer
+networks:
+  - id: 11155420
+    start_block: 0
+    contracts:
+      - name: Storefront
+        address:
+          - 0xF48ACd216a09CC72f71e2f8E3C5c9aE36a8bbE7c
+        handler: src/EventHandlers.ts
+        events:
+          - event: ProductListed(string indexed asin, address seller, uint256 price)
+rollback_on_reorg: false
