@@ -13,6 +13,7 @@ export default function ProductPage({ params }: { params: { asin: string } }) {
   const [products, setProducts] = useState<Product[] | undefined>();
   const { prices } = usePrices();
 
+  // TODO: Use indexer to find listed product
   useEffect(() => {
     findProduct(params.asin)
       .then((product) => {
