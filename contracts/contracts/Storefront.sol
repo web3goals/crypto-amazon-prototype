@@ -19,7 +19,7 @@ contract Storefront is Ownable, FunctionsClient {
     event RequestSent(bytes32 requestId, ChainlinkRequestData requestData);
     event RequestFulfilled(bytes32 requestId, bytes response, bytes err);
     event AttestationMade(uint64 attestationId, Attestation attestation);
-    event ProductListed(string indexed asin, address seller, uint256 price);
+    event ProductListed(string asin, address seller, uint256 price);
 
     bytes32 private _chainlinkDonId;
     uint64 private _chainlinkSubscriptionId;

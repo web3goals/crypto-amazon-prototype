@@ -146,7 +146,7 @@ export const storefrontAbi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
+        indexed: false,
         internalType: "string",
         name: "asin",
         type: "string",

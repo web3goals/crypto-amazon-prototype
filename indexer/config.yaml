@@ -6,8 +6,8 @@ networks:
     contracts:
       - name: Storefront
         address:
-          - 0xF48ACd216a09CC72f71e2f8E3C5c9aE36a8bbE7c
+          - 0xf2F5F769509065DFdfe9f31E440F3f94e9F7c21b
         handler: src/EventHandlers.ts
         events:
-          - event: ProductListed(string indexed asin, address seller, uint256 price)
+          - event: ProductListed(string asin, address seller, uint256 price)
 rollback_on_reorg: false

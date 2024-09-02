@@ -43,7 +43,7 @@ export const CONTRACTS: {
       address: "0x4e4af2a21ebf62850fD99Eb6253E1eFBb56098cD",
       schemaId: "0x5",
     },
-    storefront: "0xF48ACd216a09CC72f71e2f8E3C5c9aE36a8bbE7c",
+    storefront: "0xf2F5F769509065DFdfe9f31E440F3f94e9F7c21b",
     usdt: "0x55FC13643e03284242941F043967583aB79b288F",
     checkout: "0xE008d8d7C4a0368c68a37DE2e9E0D5C323EA9978",
   },
