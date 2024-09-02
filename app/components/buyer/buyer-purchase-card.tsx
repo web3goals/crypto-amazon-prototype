@@ -5,7 +5,7 @@ import useError from "@/hooks/useError";
 import { getStorefrontChainConfig } from "@/lib/chains";
 import { findProduct, Product } from "@/lib/products";
 import { CheckoutDeal } from "@/types/checkout-deal";
-import { InfoIcon, MessagesSquareIcon } from "lucide-react";
+import { MessagesSquareIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useReadContract } from "wagmi";
@@ -13,7 +13,7 @@ import { ProductCardHeader } from "../product-card-header";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
-import { toast } from "../ui/use-toast";
+import { BuyerSubscribeToSellerButton } from "./buyer-subscribe-to-seller-button";
 
 export function BuyerPurchaseCard(props: {
   deal: CheckoutDeal;
@@ -62,13 +62,7 @@ export function BuyerPurchaseCard(props: {
             Contact Seller
           </Button>
         </Link>
-        {/* TODO: Implement button */}
-        <Button
-          variant="secondary"
-          onClick={() => toast({ title: "Not implemented yet 😬" })}
-        >
-          <InfoIcon className="mr-2 h-4 w-4" /> Open Details
-        </Button>
+        <BuyerSubscribeToSellerButton seller={props.deal.seller} />
       </div>
     </div>
   );

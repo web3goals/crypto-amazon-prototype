@@ -6,6 +6,7 @@ import {
   CompassIcon,
   GithubIcon,
   HandshakeIcon,
+  MegaphoneIcon,
   MenuIcon,
   MessagesSquareIcon,
   SearchIcon,
@@ -68,6 +69,12 @@ export function SiteHeader() {
                 <DropdownMenuItem>
                   <WalletIcon className="mr-2 h-4 w-4" />
                   <span>Balance</span>
+                </DropdownMenuItem>
+              </Link>
+              <Link href="/seller/broadcast">
+                <DropdownMenuItem>
+                  <MegaphoneIcon className="mr-2 h-4 w-4" />
+                  <span>Broadcast</span>
                 </DropdownMenuItem>
               </Link>
               <DropdownMenuSeparator />
