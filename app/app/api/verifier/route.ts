@@ -1,6 +1,8 @@
 import { errorToString } from "@/lib/converters";
 import { NextRequest } from "next/server";
 
+export const dynamic = "force-dynamic"; // Defaults to force-static
+
 /**
  * Structure reference - https://github.com/omniti-labs/jsend
  */
