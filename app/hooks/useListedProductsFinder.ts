@@ -4,6 +4,7 @@ import { ListedProduct } from "@/types/listed-product";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+// TODO: Use sign protocol api to get listed products if indexer not defined
 export default function useListedProductsFinder(asin?: string) {
   const [listedProducts, setListedProducts] = useState<
     ListedProduct[] | undefined

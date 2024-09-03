@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { decodeAbiParameters } from "viem";
 
+// TODO: Replace with "useListedProductsFinder"
 export default function usePricesLoader() {
   const [prices, setPrices] = useState<Map<string, bigint> | undefined>();
 
