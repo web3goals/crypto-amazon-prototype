@@ -1,16 +1,15 @@
 "use client";
 
 import { BuyerProductCard } from "@/components/buyer/buyer-product-card";
-import EntityList from "@/components/entity-list";
 import { Separator } from "@/components/ui/separator";
-import useListedProductsFinder from "@/hooks/useListedProductsFinder";
-import usePricesLoader from "@/hooks/usePricesLoader";
-import useProductsFinder from "@/hooks/useProductsFinder";
+import { Skeleton } from "@/components/ui/skeleton";
+import useListedProductFinder from "@/hooks/useListedProductFinder";
+import useProductFinder from "@/hooks/useProductFinder";
 
 export default function ProductPage({ params }: { params: { asin: string } }) {
-  const { listedProducts } = useListedProductsFinder(params.asin);
-  const { products } = useProductsFinder(listedProducts?.[0]?.asin);
-  const { prices } = usePricesLoader();
+  const { data: listedProduct, loading: listedProductLoading } =
+    useListedProductFinder(params.asin);
+  const { data: product } = useProductFinder(listedProduct?.asin);
 
   return (
     <main className="container py-10 lg:px-80">
@@ -19,17 +18,15 @@ export default function ProductPage({ params }: { params: { asin: string } }) {
         <p className="text-muted-foreground">That you can buy with crypto</p>
       </div>
       <Separator className="my-6" />
-      <EntityList
-        entities={products}
-        renderEntityCard={(product, index) => (
-          <BuyerProductCard
-            key={index}
-            product={product}
-            price={prices?.get(product.asin)}
-          />
-        )}
-        noEntitiesText={`Product not found 😐`}
-      />
+      {listedProductLoading ? (
+        <Skeleton className="h-8" />
+      ) : listedProduct && product ? (
+        <BuyerProductCard product={product} price={listedProduct.price} />
+      ) : (
+        <div className="w-full flex flex-col items-center border rounded px-6 py-8">
+          <p className="text-sm text-muted-foreground">Product not found 😐</p>
+        </div>
+      )}
     </main>
   );
 }
