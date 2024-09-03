@@ -1,7 +1,7 @@
 "use client";
 
 import { testSellerAccountConfig } from "@/config/test-seller-account";
-import usePricesLoader from "@/hooks/usePricesLoader";
+import useListedProductsFinder from "@/hooks/useListedProductsFinder";
 import { Product } from "@/types/product";
 import { useEffect, useState } from "react";
 import EntityList from "../entity-list";
@@ -9,7 +9,7 @@ import { SellerProductCard } from "./seller-product-card";
 
 export function SellerProductsAccountTest() {
   const [products, setProducts] = useState<Product[] | undefined>();
-  const { prices } = usePricesLoader();
+  const { data: listedProducts } = useListedProductsFinder();
 
   useEffect(() => {
     new Promise((resolve) => setTimeout(resolve, 1000)).then(() =>
@@ -24,7 +24,11 @@ export function SellerProductsAccountTest() {
         <SellerProductCard
           key={index}
           product={product}
-          price={prices?.get(product.asin)}
+          price={
+            listedProducts?.find(
+              (listedProduct) => listedProduct.asin === product.asin
+            )?.price
+          }
           sellerAmazonToken={testSellerAccountConfig.amazonToken}
         />
       )}

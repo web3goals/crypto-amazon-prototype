@@ -19,6 +19,17 @@ function signProtocolDataToListedProducts(data: any): ListedProduct[] {
   return listedProducts;
 }
 
+export async function getListedProductsBySignProtocol(
+  signProtocolApi: string,
+  signProtocolSchemaId: string
+): Promise<ListedProduct[] | undefined> {
+  const { data } = await axios.get(
+    signProtocolApi + "/index/attestations?schemaId=" + signProtocolSchemaId
+  );
+  const listedProducts = signProtocolDataToListedProducts(data);
+  return listedProducts.toReversed();
+}
+
 export async function getListedProductBySignProtocol(
   signProtocolApi: string,
   signProtocolSchemaId: string,
@@ -28,6 +39,7 @@ export async function getListedProductBySignProtocol(
     signProtocolApi + "/index/attestations?schemaId=" + signProtocolSchemaId
   );
   const listedProducts = signProtocolDataToListedProducts(data);
-  console.log({ listedProducts });
-  return listedProducts.find((listedProduct) => listedProduct.asin === asin);
+  return listedProducts
+    .toReversed()
+    .find((listedProduct) => listedProduct.asin === asin);
 }

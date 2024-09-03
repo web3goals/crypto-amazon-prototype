@@ -1,47 +1,41 @@
 import { getStorefrontChainConfig } from "@/lib/chains";
-import { errorToString } from "@/lib/converters";
+import { getListedProductsByIndexer } from "@/lib/indexer";
+import { getListedProductsBySignProtocol } from "@/lib/sign-protocol";
 import { ListedProduct } from "@/types/listed-product";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import useError from "./useError";
 
-// TODO: Use sign protocol api to get listed products if indexer not defined
-export default function useListedProductsFinder(asin?: string) {
-  const [listedProducts, setListedProducts] = useState<
-    ListedProduct[] | undefined
-  >();
+export default function useListedProductsFinder() {
+  const { handleError } = useError();
+  const [data, setData] = useState<ListedProduct[] | undefined>();
 
   useEffect(() => {
-    if (asin) {
-      axios
-        .post(
-          getStorefrontChainConfig().indexerUrl,
-          {
-            query: `
-              query MyQuery {
-                Storefront_ProductListed(where: {asin: {_eq: "${asin}"}}) {
-                  id
-                  asin
-                  price
-                  seller
-                }
-              }
-            `,
-          },
-          { headers: { "x-hasura-admin-secret": "testing" } }
-        )
-        .then(({ data }) => {
-          setListedProducts(data.data.Storefront_ProductListed);
+    // Load listed product by indexer
+    if (getStorefrontChainConfig().indexerUrl) {
+      getListedProductsByIndexer(getStorefrontChainConfig().indexerUrl)
+        .then((listedProducts) => {
+          setData(listedProducts);
         })
-        .catch((error) => {
-          console.error(
-            `Failed to find listed product by '${asin}':` + errorToString(error)
-          );
-        });
+        .catch((error) => handleError(error, true));
+    }
+    // Load listed product by sign protocol
+    else if (
+      getStorefrontChainConfig().signProtocolApi &&
+      getStorefrontChainConfig().signProtocolSchemaId
+    ) {
+      getListedProductsBySignProtocol(
+        getStorefrontChainConfig().signProtocolApi,
+        getStorefrontChainConfig().signProtocolSchemaId
+      )
+        .then((listedProducts) => {
+          setData(listedProducts);
+        })
+        .catch((error) => handleError(error, true));
     } else {
-      setListedProducts([]);
+      setData(undefined);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [asin]);
+  }, []);
 
-  return { listedProducts };
+  return { data };
 }

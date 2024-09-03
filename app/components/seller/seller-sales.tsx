@@ -2,7 +2,7 @@
 
 import { checkoutAbi } from "@/abi/checkout";
 import { ChainConfig } from "@/config/chains";
-import usePricesLoader from "@/hooks/usePricesLoader";
+import useListedProductsFinder from "@/hooks/useListedProductsFinder";
 import { getChainConfigsWithCheckout } from "@/lib/chains";
 import { erc20Abi, zeroAddress } from "viem";
 import { useAccount, useReadContract } from "wagmi";
@@ -21,7 +21,7 @@ export function SellerSales() {
 
 function SellerSalesByChain(props: { chainConfig: ChainConfig }) {
   const { address } = useAccount();
-  const { prices } = usePricesLoader();
+  const { data: listedProducts } = useListedProductsFinder();
 
   const { data: sales } = useReadContract({
     address: props.chainConfig.checkout,
@@ -65,7 +65,11 @@ function SellerSalesByChain(props: { chainConfig: ChainConfig }) {
               paymentTokenSymbol: paymentTokenSymbol || "",
               chainConfig: props.chainConfig,
             }}
-            price={prices?.get(sale.asin)}
+            price={
+              listedProducts?.find(
+                (listedProduct) => listedProduct.asin === sale.asin
+              )?.price
+            }
           />
         );
       }}
