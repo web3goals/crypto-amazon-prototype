@@ -65,11 +65,9 @@ function BuyerPurchasesByChain(props: { chainConfig: ChainConfig }) {
               paymentTokenSymbol: paymentTokenSymbol || "",
               chainConfig: props.chainConfig,
             }}
-            price={
-              listedProducts?.find(
-                (listedProduct) => listedProduct.asin === purchase.asin
-              )?.price
-            }
+            listedProduct={listedProducts?.find(
+              (listedProduct) => listedProduct.asin === purchase.asin
+            )}
           />
         );
       }}

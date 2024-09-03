@@ -43,6 +43,7 @@ import {
   useReadContract,
   useWalletClient,
 } from "wagmi";
+import { ListedProduct } from "@/types/listed-product";
 
 type BuyingFormData = {
   buyerName: string;
@@ -52,7 +53,7 @@ type BuyingFormData = {
 
 export function BuyerProductCardFooterBuying(props: {
   product: Product;
-  price: bigint | undefined;
+  listedProduct: ListedProduct | undefined;
   verifiedSeller: Address | undefined;
 }) {
   const [buyingFormData, setBuyingFormData] = useState<
@@ -68,7 +69,7 @@ export function BuyerProductCardFooterBuying(props: {
     return (
       <SellerProductCardFooterBuyingFormConfirm
         product={props.product}
-        price={props.price}
+        listedProduct={props.listedProduct}
         verifiedSeller={props.verifiedSeller}
         buyingFormData={buyingFormData}
         onBought={() => setBought(true)}
@@ -220,7 +221,7 @@ function SellerProductCardFooterBuyingForm(props: {
 
 function SellerProductCardFooterBuyingFormConfirm(props: {
   product: Product;
-  price: bigint | undefined;
+  listedProduct: ListedProduct | undefined;
   verifiedSeller: Address | undefined;
   buyingFormData: BuyingFormData;
   onBought: () => void;
@@ -248,10 +249,10 @@ function SellerProductCardFooterBuyingFormConfirm(props: {
   });
 
   const paymentAmount =
-    props.price &&
+    props.listedProduct?.price &&
     chainlinkDataFeedAnswer &&
     chainlinkDataFeedAnswer !== BigInt(0)
-      ? (props.price / chainlinkDataFeedAnswer) * BigInt(10 ** 8)
+      ? (props.listedProduct?.price / chainlinkDataFeedAnswer) * BigInt(10 ** 8)
       : BigInt(0);
 
   async function onSubmit() {

@@ -2,6 +2,7 @@
 
 import { storefrontAbi } from "@/abi/storefront";
 import { getStorefrontChainConfig } from "@/lib/chains";
+import { ListedProduct } from "@/types/listed-product";
 import { Product } from "@/types/product";
 import { useEffect, useState } from "react";
 import { isAddressEqual } from "viem";
@@ -13,7 +14,7 @@ import { SellerProductCardFooterVerified } from "./seller-product-card-footer-ve
 
 export function SellerProductCard(props: {
   product: Product;
-  price: bigint | undefined;
+  listedProduct: ListedProduct | undefined;
   sellerAmazonToken: string;
 }) {
   const { address } = useAccount();
@@ -40,7 +41,7 @@ export function SellerProductCard(props: {
     <div className="w-full flex flex-col border rounded px-6 py-8">
       <ProductCardHeader
         product={props.product}
-        price={props.price}
+        listedProduct={props.listedProduct}
         verifiedSeller={verifiedSeller}
       />
       <Separator className="my-6" />

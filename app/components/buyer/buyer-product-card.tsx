@@ -11,10 +11,11 @@ import { storefrontAbi } from "@/abi/storefront";
 import { getStorefrontChainConfig } from "@/lib/chains";
 import { useReadContract } from "wagmi";
 import { Address } from "viem";
+import { ListedProduct } from "@/types/listed-product";
 
 export function BuyerProductCard(props: {
   product: Product;
-  price: bigint | undefined;
+  listedProduct: ListedProduct | undefined;
 }) {
   const { data: verifiedSeller } = useReadContract({
     address: getStorefrontChainConfig().storefront,
@@ -28,15 +29,15 @@ export function BuyerProductCard(props: {
     <div className="w-full flex flex-col border rounded px-6 py-8">
       <ProductCardHeader
         product={props.product}
-        price={props.price}
+        listedProduct={props.listedProduct}
         verifiedSeller={verifiedSeller}
       />
-      {props.price && (
+      {props.listedProduct && (
         <>
           <Separator className="my-6" />
           <BuyerProductCardFooterSaleable
             product={props.product}
-            price={props.price}
+            listedProduct={props.listedProduct}
             verifiedSeller={verifiedSeller}
           />
         </>
@@ -47,7 +48,7 @@ export function BuyerProductCard(props: {
 
 function BuyerProductCardFooterSaleable(props: {
   product: Product;
-  price: bigint | undefined;
+  listedProduct: ListedProduct | undefined;
   verifiedSeller: Address | undefined;
 }) {
   const [clicked, setClicked] = useState(false);
@@ -56,7 +57,7 @@ function BuyerProductCardFooterSaleable(props: {
     return (
       <BuyerProductCardFooterBuying
         product={props.product}
-        price={props.price}
+        listedProduct={props.listedProduct}
         verifiedSeller={props.verifiedSeller}
       />
     );

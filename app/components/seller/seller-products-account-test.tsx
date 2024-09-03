@@ -24,11 +24,9 @@ export function SellerProductsAccountTest() {
         <SellerProductCard
           key={index}
           product={product}
-          price={
-            listedProducts?.find(
-              (listedProduct) => listedProduct.asin === product.asin
-            )?.price
-          }
+          listedProduct={listedProducts?.find(
+            (listedProduct) => listedProduct.asin === product.asin
+          )}
           sellerAmazonToken={testSellerAccountConfig.amazonToken}
         />
       )}

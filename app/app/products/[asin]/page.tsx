@@ -21,7 +21,7 @@ export default function ProductPage({ params }: { params: { asin: string } }) {
       {listedProductLoading ? (
         <Skeleton className="h-8" />
       ) : listedProduct && product ? (
-        <BuyerProductCard product={product} price={listedProduct.price} />
+        <BuyerProductCard product={product} listedProduct={listedProduct} />
       ) : (
         <div className="w-full flex flex-col items-center border rounded px-6 py-8">
           <p className="text-sm text-muted-foreground">Product not found 😐</p>

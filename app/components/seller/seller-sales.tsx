@@ -65,11 +65,9 @@ function SellerSalesByChain(props: { chainConfig: ChainConfig }) {
               paymentTokenSymbol: paymentTokenSymbol || "",
               chainConfig: props.chainConfig,
             }}
-            price={
-              listedProducts?.find(
-                (listedProduct) => listedProduct.asin === sale.asin
-              )?.price
-            }
+            listedProduct={listedProducts?.find(
+              (listedProduct) => listedProduct.asin === sale.asin
+            )}
           />
         );
       }}

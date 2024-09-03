@@ -12,10 +12,11 @@ import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 import { toast } from "../ui/use-toast";
+import { ListedProduct } from "@/types/listed-product";
 
 export function SellerSaleCard(props: {
   deal: CheckoutDeal;
-  price: bigint | undefined;
+  listedProduct: ListedProduct | undefined;
 }) {
   const { data: product } = useProductFinder(props.deal.asin);
 
@@ -35,7 +36,7 @@ export function SellerSaleCard(props: {
     <div className="w-full flex flex-col border rounded px-6 py-8">
       <ProductCardHeader
         product={product}
-        price={props.price}
+        listedProduct={props.listedProduct}
         verifiedSeller={verifiedSeller}
         deal={props.deal}
       />

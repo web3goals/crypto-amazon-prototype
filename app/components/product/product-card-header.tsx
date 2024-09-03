@@ -7,10 +7,11 @@ import { CheckoutDeal } from "@/types/checkout-deal";
 import { ShieldCheckIcon } from "lucide-react";
 import { Address, formatEther, isAddressEqual, zeroAddress } from "viem";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { ListedProduct } from "@/types/listed-product";
 
 export function ProductCardHeader(props: {
   product: Product;
-  price: bigint | undefined;
+  listedProduct: ListedProduct | undefined;
   verifiedSeller: Address | undefined;
   deal?: CheckoutDeal;
 }) {
@@ -66,7 +67,9 @@ export function ProductCardHeader(props: {
       <div className="flex flex-col md:flex-row md:gap-3 mt-2">
         <p className="min-w-[90px] text-sm text-muted-foreground">Price:</p>
         <p className="text-sm break-all">
-          {props.price ? `${formatEther(props.price)} USD` : "Unsaleable"}
+          {props.listedProduct?.price
+            ? `${formatEther(props.listedProduct.price)} USD`
+            : "Unsaleable"}
         </p>
       </div>
       {props.deal && (
