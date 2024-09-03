@@ -3,7 +3,7 @@
 import { ChainConfig, chainConfigs } from "@/config/chains";
 import useError from "@/hooks/useError";
 import { getChainConfigById, getChainConfigsWithCheckout } from "@/lib/chains";
-import { Product } from "@/lib/products";
+import { Product } from "@/types/product";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   CheckIcon,

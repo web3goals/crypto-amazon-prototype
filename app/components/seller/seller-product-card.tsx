@@ -2,7 +2,7 @@
 
 import { storefrontAbi } from "@/abi/storefront";
 import { getStorefrontChainConfig } from "@/lib/chains";
-import { Product } from "@/lib/products";
+import { Product } from "@/types/product";
 import { useEffect, useState } from "react";
 import { isAddressEqual } from "viem";
 import { useAccount, useReadContract } from "wagmi";

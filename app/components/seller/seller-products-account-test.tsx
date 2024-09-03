@@ -2,7 +2,7 @@
 
 import { testSellerAccountConfig } from "@/config/test-seller-account";
 import usePricesLoader from "@/hooks/usePricesLoader";
-import { Product } from "@/lib/products";
+import { Product } from "@/types/product";
 import { useEffect, useState } from "react";
 import EntityList from "../entity-list";
 import { SellerProductCard } from "./seller-product-card";

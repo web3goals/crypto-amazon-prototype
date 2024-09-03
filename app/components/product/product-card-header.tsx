@@ -2,7 +2,7 @@
 
 import { getStorefrontChainConfig } from "@/lib/chains";
 import { addressToShortAddress } from "@/lib/converters";
-import { Product } from "@/lib/products";
+import { Product } from "@/types/product";
 import { CheckoutDeal } from "@/types/checkout-deal";
 import { ShieldCheckIcon } from "lucide-react";
 import { Address, formatEther, isAddressEqual, zeroAddress } from "viem";

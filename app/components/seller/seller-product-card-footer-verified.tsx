@@ -1,4 +1,4 @@
-import { Product } from "@/lib/products";
+import { Product } from "@/types/product";
 import { CircleDollarSignIcon, WandSparklesIcon } from "lucide-react";
 import { useState } from "react";
 import { SellerProductCardFooterSelling } from "./seller-product-card-footer-selling";

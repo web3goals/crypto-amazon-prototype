@@ -1,4 +1,4 @@
-import { Product } from "@/lib/products";
+import { Product } from "@/types/product";
 
 export type TestSellerAccountConfig = typeof testSellerAccountConfig;
 

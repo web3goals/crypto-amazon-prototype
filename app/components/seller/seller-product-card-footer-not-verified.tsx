@@ -3,7 +3,7 @@
 import { storefrontAbi } from "@/abi/storefront";
 import useError from "@/hooks/useError";
 import { getStorefrontChainConfig } from "@/lib/chains";
-import { Product } from "@/lib/products";
+import { Product } from "@/types/product";
 import { Loader2, ShieldCheckIcon } from "lucide-react";
 import { useState } from "react";
 import { useAccount, usePublicClient, useWalletClient } from "wagmi";

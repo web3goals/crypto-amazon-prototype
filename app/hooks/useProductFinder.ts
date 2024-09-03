@@ -1,5 +1,5 @@
 import { testSellerAccountConfig } from "@/config/test-seller-account";
-import { Product } from "@/lib/products";
+import { Product } from "@/types/product";
 import { useEffect, useState } from "react";
 
 export default function useProductFinder(asin: string | undefined) {

@@ -3,7 +3,7 @@
 import { storefrontAbi } from "@/abi/storefront";
 import useError from "@/hooks/useError";
 import { getStorefrontChainConfig } from "@/lib/chains";
-import { Product } from "@/lib/products";
+import { Product } from "@/types/product";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BarcodeIcon, CheckIcon, Loader2 } from "lucide-react";
 import Link from "next/link";

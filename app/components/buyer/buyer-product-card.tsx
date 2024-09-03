@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@/lib/products";
+import { Product } from "@/types/product";
 import { useState } from "react";
 import { ProductCardHeader } from "../product/product-card-header";
 import { Button } from "../ui/button";
