@@ -21,7 +21,7 @@ export const chainConfigs = {
     checkoutPaymentTokenSymbol: "USDT",
     signProtocolApi: "https://testnet-rpc.sign.global/api",
     signProtocolSchemaId: "onchain_evm_11155420_0x5",
-    indexer: "http://localhost:8080/v1/graphql",
+    indexer: "http://localhost:8080/v1/graphql", // TODO: Replace link for release
   } as ChainConfig,
   morphHolesky: {
     chain: morphHolesky,
