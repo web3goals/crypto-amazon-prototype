@@ -22,9 +22,12 @@ export const CONTRACTS: {
           schemaId: `0x${string}`;
         }
       | undefined;
+    galadrielOracle: `0x${string}` | undefined;
     storefront: `0x${string}` | undefined;
     usdt: `0x${string}` | undefined;
     checkout: `0x${string}` | undefined;
+    chatGpt: `0x${string}` | undefined;
+    summarizer: `0x${string}` | undefined;
   };
 } = {
   optimismSepolia: {
@@ -43,8 +46,22 @@ export const CONTRACTS: {
       address: "0x4e4af2a21ebf62850fD99Eb6253E1eFBb56098cD",
       schemaId: "0x5",
     },
+    galadrielOracle: undefined,
     storefront: "0xf2F5F769509065DFdfe9f31E440F3f94e9F7c21b",
     usdt: "0x55FC13643e03284242941F043967583aB79b288F",
     checkout: "0xE008d8d7C4a0368c68a37DE2e9E0D5C323EA9978",
+    chatGpt: "0x0000000000000000000000000000000000000000",
+    summarizer: "0x0000000000000000000000000000000000000000",
+  },
+  galadrielDevnet: {
+    chainlinkFunctions: undefined,
+    chainlinkDataFeed: undefined,
+    signProtocol: undefined,
+    galadrielOracle: "0x68EC9556830AD097D661Df2557FBCeC166a0A075",
+    storefront: "0x0000000000000000000000000000000000000000",
+    usdt: "0x0000000000000000000000000000000000000000",
+    checkout: "0x0000000000000000000000000000000000000000",
+    chatGpt: "0x12884Fb3EAEB3C0A2C6EC390954304bc37192611",
+    summarizer: undefined,
   },
 };

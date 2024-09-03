@@ -53,6 +53,18 @@ async function main() {
       `Contract 'Checkout' deployed to: ${await contract.getAddress()}`
     );
   }
+
+  if (!CONTRACTS[network].chatGpt && CONTRACTS[network].galadrielOracle) {
+    const contractFactory = await ethers.getContractFactory("ChatGpt");
+    const contract = await contractFactory.deploy(
+      CONTRACTS[network].galadrielOracle,
+      ""
+    );
+    await contract.waitForDeployment();
+    console.log(
+      `Contract 'ChatGpt' deployed to: ${await contract.getAddress()}`
+    );
+  }
 }
 
 main().catch((error) => {
