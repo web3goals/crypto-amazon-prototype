@@ -2,7 +2,9 @@
 
 import useError from "@/hooks/useError";
 import useEthersWalletClient from "@/hooks/useEthersWalletClient";
+import { getSubscriptions } from "@/lib/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { invitation } from "@xmtp/proto";
 import { Client } from "@xmtp/xmtp-js";
 import { Loader2, MegaphoneIcon } from "lucide-react";
 import { useState } from "react";
@@ -19,10 +21,8 @@ import {
 } from "../ui/form";
 import { Textarea } from "../ui/textarea";
 import { toast } from "../ui/use-toast";
-import { invitation } from "@xmtp/proto";
-import { getSubscriptions } from "@/lib/actions";
 
-export function SellerBroadcastSendForm() {
+export default function SellerBroadcastSendForm() {
   const { handleError } = useError();
   const { data: walletClient } = useEthersWalletClient();
   const [submitting, setSubmitting] = useState(false);

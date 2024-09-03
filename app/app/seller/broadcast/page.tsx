@@ -1,5 +1,12 @@
-import { SellerBroadcastSendForm } from "@/components/seller/seller-broadcast-send-form";
+"use client";
+
 import { Separator } from "@/components/ui/separator";
+import dynamic from "next/dynamic";
+
+const DynamicSellerBroadcastSendForm = dynamic(
+  () => import("@/components/seller/seller-broadcast-send-form"),
+  { ssr: false }
+);
 
 export default function BroadcastPage() {
   return (
@@ -11,7 +18,7 @@ export default function BroadcastPage() {
         </p>
       </div>
       <Separator className="my-6" />
-      <SellerBroadcastSendForm />
+      <DynamicSellerBroadcastSendForm />
     </main>
   );
 }
