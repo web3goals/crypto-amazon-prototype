@@ -14,7 +14,7 @@ export default function useListedProductsFinder(asin?: string) {
     if (asin) {
       axios
         .post(
-          getStorefrontChainConfig().indexer,
+          getStorefrontChainConfig().indexerUrl,
           {
             query: `
               query MyQuery {
