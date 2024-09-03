@@ -22,7 +22,12 @@ export const CONTRACTS: {
           schemaId: `0x${string}`;
         }
       | undefined;
-    galadrielOracle: `0x${string}` | undefined;
+    galadriel:
+      | {
+          oracle: `0x${string}`;
+          prompt: string;
+        }
+      | undefined;
     storefront: `0x${string}` | undefined;
     usdt: `0x${string}` | undefined;
     checkout: `0x${string}` | undefined;
@@ -46,7 +51,7 @@ export const CONTRACTS: {
       address: "0x4e4af2a21ebf62850fD99Eb6253E1eFBb56098cD",
       schemaId: "0x5",
     },
-    galadrielOracle: undefined,
+    galadriel: undefined,
     storefront: "0xf2F5F769509065DFdfe9f31E440F3f94e9F7c21b",
     usdt: "0x55FC13643e03284242941F043967583aB79b288F",
     checkout: "0xE008d8d7C4a0368c68a37DE2e9E0D5C323EA9978",
@@ -57,11 +62,15 @@ export const CONTRACTS: {
     chainlinkFunctions: undefined,
     chainlinkDataFeed: undefined,
     signProtocol: undefined,
-    galadrielOracle: "0x68EC9556830AD097D661Df2557FBCeC166a0A075",
+    galadriel: {
+      oracle: "0x68EC9556830AD097D661Df2557FBCeC166a0A075",
+      prompt:
+        "You are an amazon seller assistant. You need to read the following amazon product reviews written by customers and summarize them into one post that will be posted on the product page for everyone to see. Maximum 240 characters. Reviews: ",
+    },
     storefront: "0x0000000000000000000000000000000000000000",
     usdt: "0x0000000000000000000000000000000000000000",
     checkout: "0x0000000000000000000000000000000000000000",
     chatGpt: "0x12884Fb3EAEB3C0A2C6EC390954304bc37192611",
-    summarizer: undefined,
+    summarizer: "0x07b7e2AE0A9B1f74610e2465d8043e7E7a5632A6",
   },
 };

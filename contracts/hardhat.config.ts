@@ -12,11 +12,16 @@ const config: HardhatUserConfig = {
         enabled: true,
         runs: 1000,
       },
+      viaIR: true,
     },
   },
   networks: {
     optimismSepolia: {
       url: "https://sepolia.optimism.io",
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
+    galadrielDevnet: {
+      url: "https://devnet.galadriel.com",
       accounts: [process.env.PRIVATE_KEY as string],
     },
   },

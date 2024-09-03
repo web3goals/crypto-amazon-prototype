@@ -54,15 +54,27 @@ async function main() {
     );
   }
 
-  if (!CONTRACTS[network].chatGpt && CONTRACTS[network].galadrielOracle) {
+  if (!CONTRACTS[network].chatGpt && CONTRACTS[network].galadriel) {
     const contractFactory = await ethers.getContractFactory("ChatGpt");
     const contract = await contractFactory.deploy(
-      CONTRACTS[network].galadrielOracle,
+      CONTRACTS[network].galadriel.oracle,
       ""
     );
     await contract.waitForDeployment();
     console.log(
       `Contract 'ChatGpt' deployed to: ${await contract.getAddress()}`
+    );
+  }
+
+  if (!CONTRACTS[network].summarizer && CONTRACTS[network].galadriel) {
+    const contractFactory = await ethers.getContractFactory("Summarizer");
+    const contract = await contractFactory.deploy(
+      CONTRACTS[network].galadriel.oracle,
+      CONTRACTS[network].galadriel.prompt
+    );
+    await contract.waitForDeployment();
+    console.log(
+      `Contract 'Summarizer' deployed to: ${await contract.getAddress()}`
     );
   }
 }
