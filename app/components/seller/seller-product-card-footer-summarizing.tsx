@@ -1,33 +1,15 @@
 "use client";
 
-import { Product } from "@/types/product";
-import { useState } from "react";
-import { storefrontAbi } from "@/abi/storefront";
-import useError from "@/hooks/useError";
-import {
-  getStorefrontChainConfig,
-  getSummarizerChainConfig,
-} from "@/lib/chains";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { BarcodeIcon, CheckIcon, Loader2 } from "lucide-react";
-import Link from "next/link";
-import Confetti from "react-confetti";
-import { useForm } from "react-hook-form";
-import { parseEther } from "viem";
-import { useAccount, usePublicClient, useWalletClient } from "wagmi";
-import { z } from "zod";
-import { Button } from "../ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
 import { summarizerAbi } from "@/abi/summarizer";
+import useError from "@/hooks/useError";
+import { getSummarizerChainConfig } from "@/lib/chains";
+import { Product } from "@/types/product";
+import { CheckIcon, Loader2 } from "lucide-react";
+import { useState } from "react";
+import Confetti from "react-confetti";
+import { useAccount, usePublicClient, useWalletClient } from "wagmi";
+import { Button } from "../ui/button";
 
-// TODO: Implement
 export function SellerProductCardFooterSummarizing(props: {
   product: Product;
 }) {

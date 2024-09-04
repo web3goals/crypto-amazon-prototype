@@ -1,7 +1,7 @@
 import { ListedProduct } from "@/types/listed-product";
 import axios from "axios";
 
-// TODO: Delete duplicates
+// TODO: Return only the last prices
 export async function getListedProductsByIndexer(
   indexerUrl: string
 ): Promise<ListedProduct[] | undefined> {
@@ -25,6 +25,7 @@ export async function getListedProductsByIndexer(
   return listedProducts?.[0];
 }
 
+// TODO: Return only the last prices
 export async function getListedProductByIndexer(
   indexerUrl: string,
   asin: string
