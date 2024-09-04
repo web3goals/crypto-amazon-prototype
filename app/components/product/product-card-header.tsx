@@ -93,6 +93,18 @@ export function ProductCardHeader(props: {
           </div>
           <div className="flex flex-col md:flex-row md:gap-3 mt-2">
             <p className="min-w-[90px] text-sm text-muted-foreground">
+              Buyer name:
+            </p>
+            <p className="text-sm break-all">{props.deal.buyerName}</p>
+          </div>
+          <div className="flex flex-col md:flex-row md:gap-3 mt-2">
+            <p className="min-w-[90px] text-sm text-muted-foreground">
+              Buyer address:
+            </p>
+            <p className="text-sm break-all">{props.deal.buyerAddress}</p>
+          </div>
+          <div className="flex flex-col md:flex-row md:gap-3 mt-2">
+            <p className="min-w-[90px] text-sm text-muted-foreground">
               Payment:
             </p>
             <p className="text-sm break-all">

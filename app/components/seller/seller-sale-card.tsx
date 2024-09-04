@@ -1,22 +1,21 @@
 "use client";
 
 import { storefrontAbi } from "@/abi/storefront";
+import { summarizerAbi } from "@/abi/summarizer";
 import useProductFinder from "@/hooks/useProductFinder";
 import {
   getStorefrontChainConfig,
   getSummarizerChainConfig,
 } from "@/lib/chains";
 import { CheckoutDeal } from "@/types/checkout-deal";
-import { InfoIcon, MessagesSquareIcon } from "lucide-react";
+import { ListedProduct } from "@/types/listed-product";
+import { MessagesSquareIcon } from "lucide-react";
 import Link from "next/link";
 import { useReadContract } from "wagmi";
 import { ProductCardHeader } from "../product/product-card-header";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
-import { toast } from "../ui/use-toast";
-import { ListedProduct } from "@/types/listed-product";
-import { summarizerAbi } from "@/abi/summarizer";
 
 export function SellerSaleCard(props: {
   deal: CheckoutDeal;
@@ -64,14 +63,6 @@ export function SellerSaleCard(props: {
             <MessagesSquareIcon className="mr-2 h-4 w-4" /> Contact Buyer
           </Button>
         </Link>
-        {/* TODO: Implement button */}
-        <Button
-          variant="secondary"
-          onClick={() => toast({ title: "Not implemented yet 😬" })}
-        >
-          <InfoIcon className="mr-2 h-4 w-4" />
-          Open Details
-        </Button>
       </div>
     </div>
   );
