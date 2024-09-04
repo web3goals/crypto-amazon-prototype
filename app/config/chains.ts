@@ -51,8 +51,26 @@ const morphHoleskyTestnet: Chain = {
   },
   blockExplorers: {
     default: {
-      name: "Morph Holesky Testnet",
+      name: "Morph Holesky Testnet Explorer",
       url: "https://explorer-holesky.morphl2.io/",
+    },
+  },
+  testnet: true,
+};
+
+const chilizSpicyTestnet: Chain = {
+  id: 88882,
+  name: "Chiliz Spicy Testnet",
+  nativeCurrency: { name: "CHZ", symbol: "CHZ", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://spicy-rpc.chiliz.com/"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Chiliz Spicy Testnet Explorer",
+      url: "https://testnet.chiliscan.com/",
     },
   },
   testnet: true,
@@ -61,9 +79,11 @@ const morphHoleskyTestnet: Chain = {
 export type ChainConfig = {
   chain: Chain;
   usdt: Address;
+  fanToken: Address;
   storefront: Address;
   checkout: Address;
-  checkoutPaymentTokenSymbol: string; // TODO: Load this data using checkout contract
+  checkoutPaymentTokenSymbol: string; // TODO: Load this data using token contract
+  checkoutPaymentTokenDecimals: number; // TODO: Load this data using token contract
   summarizer: Address;
   signProtocolApi: string;
   signProtocolSchemaId: string;
@@ -74,9 +94,11 @@ export const chainConfigs = {
   optimismSepolia: {
     chain: optimismSepolia,
     usdt: "0x55FC13643e03284242941F043967583aB79b288F",
+    fanToken: "0x0000000000000000000000000000000000000000",
     storefront: "0xf2F5F769509065DFdfe9f31E440F3f94e9F7c21b",
     checkout: "0xE008d8d7C4a0368c68a37DE2e9E0D5C323EA9978",
     checkoutPaymentTokenSymbol: "USDT",
+    checkoutPaymentTokenDecimals: 18,
     summarizer: "0x0000000000000000000000000000000000000000",
     signProtocolApi: "https://testnet-rpc.sign.global/api",
     signProtocolSchemaId: "onchain_evm_11155420_0x5",
@@ -85,9 +107,11 @@ export const chainConfigs = {
   galadrielDevnet: {
     chain: galadrielDevnet,
     usdt: "0x0000000000000000000000000000000000000000",
+    fanToken: "0x0000000000000000000000000000000000000000",
     storefront: "0x0000000000000000000000000000000000000000",
     checkout: "0x0000000000000000000000000000000000000000",
     checkoutPaymentTokenSymbol: "",
+    checkoutPaymentTokenDecimals: 18,
     summarizer: "0x07b7e2AE0A9B1f74610e2465d8043e7E7a5632A6",
     signProtocolApi: "",
     signProtocolSchemaId: "",
@@ -96,9 +120,11 @@ export const chainConfigs = {
   rootstockTestnet: {
     chain: rootstockTestnet,
     usdt: "0xF1843bab521395b7aE283E93A98423Dc2956bd84",
+    fanToken: "0x0000000000000000000000000000000000000000",
     storefront: "0x0000000000000000000000000000000000000000",
     checkout: "0xe9F2eaF94D0F94329381037b98F6795410B8E8F8",
     checkoutPaymentTokenSymbol: "USDT",
+    checkoutPaymentTokenDecimals: 18,
     summarizer: "0x0000000000000000000000000000000000000000",
     signProtocolApi: "",
     signProtocolSchemaId: "",
@@ -107,9 +133,24 @@ export const chainConfigs = {
   morphHoleskyTestnet: {
     chain: morphHoleskyTestnet,
     usdt: "0xF1843bab521395b7aE283E93A98423Dc2956bd84",
+    fanToken: "0x0000000000000000000000000000000000000000",
     storefront: "0x0000000000000000000000000000000000000000",
     checkout: "0xe9F2eaF94D0F94329381037b98F6795410B8E8F8",
     checkoutPaymentTokenSymbol: "USDT",
+    checkoutPaymentTokenDecimals: 18,
+    summarizer: "0x0000000000000000000000000000000000000000",
+    signProtocolApi: "",
+    signProtocolSchemaId: "",
+    indexerUrl: "",
+  } as ChainConfig,
+  chilizSpicyTestnet: {
+    chain: chilizSpicyTestnet,
+    usdt: "0x0000000000000000000000000000000000000000",
+    fanToken: "0xF1843bab521395b7aE283E93A98423Dc2956bd84",
+    storefront: "0x0000000000000000000000000000000000000000",
+    checkout: "0x12884Fb3EAEB3C0A2C6EC390954304bc37192611",
+    checkoutPaymentTokenSymbol: "FANT",
+    checkoutPaymentTokenDecimals: 0,
     summarizer: "0x0000000000000000000000000000000000000000",
     signProtocolApi: "",
     signProtocolSchemaId: "",

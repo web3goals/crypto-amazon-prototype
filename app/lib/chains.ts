@@ -19,6 +19,12 @@ export function getChainConfigsWithUsdt(): ChainConfig[] {
   );
 }
 
+export function getChainConfigsWithFanToken(): ChainConfig[] {
+  return Object.values(chainConfigs).filter(
+    (chainConfig) => !isAddressEqual(chainConfig.fanToken, zeroAddress)
+  );
+}
+
 export function getChainConfigsWithCheckout(): ChainConfig[] {
   return Object.values(chainConfigs).filter(
     (chainConfig) =>

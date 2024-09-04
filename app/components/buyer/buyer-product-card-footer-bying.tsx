@@ -1,8 +1,10 @@
 "use client";
 
-import { ChainConfig, chainConfigs } from "@/config/chains";
+import { checkoutAbi } from "@/abi/checkout";
+import { ChainConfig } from "@/config/chains";
 import useError from "@/hooks/useError";
 import { getChainConfigById, getChainConfigsWithCheckout } from "@/lib/chains";
+import { ListedProduct } from "@/types/listed-product";
 import { Product } from "@/types/product";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -12,9 +14,16 @@ import {
   ShoppingBasketIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 import { useForm } from "react-hook-form";
+import { Address, erc20Abi, formatUnits, maxUint256 } from "viem";
+import {
+  useAccount,
+  usePublicClient,
+  useReadContract,
+  useWalletClient,
+} from "wagmi";
 import { z } from "zod";
 import { Button } from "../ui/button";
 import {
@@ -35,15 +44,6 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Skeleton } from "../ui/skeleton";
-import { Address, erc20Abi, formatEther, maxUint256 } from "viem";
-import { checkoutAbi } from "@/abi/checkout";
-import {
-  useAccount,
-  usePublicClient,
-  useReadContract,
-  useWalletClient,
-} from "wagmi";
-import { ListedProduct } from "@/types/listed-product";
 
 type BuyingFormData = {
   buyerName: string;
@@ -230,6 +230,9 @@ function SellerProductCardFooterBuyingFormConfirm(props: {
   const publicClient = usePublicClient();
   const { data: walletClient } = useWalletClient();
   const { address } = useAccount();
+  const [paymentAmount, setPaymentAmount] = useState<bigint | undefined>(
+    undefined
+  );
   const [submitting, setSubmitting] = useState(false);
 
   const { data: chainlinkDataFeedAnswer } = useReadContract({
@@ -248,12 +251,33 @@ function SellerProductCardFooterBuyingFormConfirm(props: {
     chainId: props.buyingFormData.chainConfig.chain.id,
   });
 
-  const paymentAmount =
-    props.listedProduct?.price &&
-    chainlinkDataFeedAnswer &&
-    chainlinkDataFeedAnswer !== BigInt(0)
-      ? (props.listedProduct?.price / chainlinkDataFeedAnswer) * BigInt(10 ** 8)
-      : BigInt(0);
+  /**
+   * Define payment amount
+   */
+  useEffect(() => {
+    if (
+      props.listedProduct?.price &&
+      chainlinkDataFeedAnswer &&
+      chainlinkDataFeedAnswer !== BigInt(0)
+    ) {
+      let paymentAmount =
+        (props.listedProduct?.price / chainlinkDataFeedAnswer) *
+        BigInt(10 ** 8);
+      paymentAmount =
+        paymentAmount /
+        BigInt(
+          10 **
+            (18 - props.buyingFormData.chainConfig.checkoutPaymentTokenDecimals)
+        );
+      setPaymentAmount(paymentAmount);
+    } else {
+      setPaymentAmount(undefined);
+    }
+  }, [
+    chainlinkDataFeedAnswer,
+    props.buyingFormData.chainConfig.checkoutPaymentTokenDecimals,
+    props.listedProduct?.price,
+  ]);
 
   async function onSubmit() {
     try {
@@ -269,6 +293,9 @@ function SellerProductCardFooterBuyingFormConfirm(props: {
       // Check other params
       if (!paymentToken) {
         throw new Error("Payment token not defined");
+      }
+      if (!paymentAmount) {
+        throw new Error("Payment amount not defined");
       }
       if (!props.verifiedSeller) {
         throw new Error("Seller not defined");
@@ -308,11 +335,7 @@ function SellerProductCardFooterBuyingFormConfirm(props: {
     }
   }
 
-  if (
-    !chainlinkDataFeedAnswer ||
-    !paymentToken ||
-    paymentAmount === BigInt(0)
-  ) {
+  if (!chainlinkDataFeedAnswer || !paymentToken || !paymentAmount) {
     return <Skeleton className="h-8" />;
   }
 
@@ -320,8 +343,16 @@ function SellerProductCardFooterBuyingFormConfirm(props: {
     <div>
       <p className="text-base font-bold">Final payment</p>
       <div className="flex flex-row items-end gap-2 mt-1">
-        <p className="text-2xl font-bold">{formatEther(paymentAmount)}</p>
-        <p>USDT ({props.buyingFormData.chainConfig.chain.name})</p>
+        <p className="text-2xl font-bold">
+          {formatUnits(
+            paymentAmount,
+            props.buyingFormData.chainConfig.checkoutPaymentTokenDecimals
+          )}
+        </p>
+        <p>
+          {props.buyingFormData.chainConfig.checkoutPaymentTokenSymbol} (
+          {props.buyingFormData.chainConfig.chain.name})
+        </p>
       </div>
       <Button
         type="submit"

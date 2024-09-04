@@ -32,6 +32,10 @@ const config: HardhatUserConfig = {
       url: `https://rpc-quicknode-holesky.morphl2.io`,
       accounts: [process.env.PRIVATE_KEY as string],
     },
+    chilizSpicyTestnet: {
+      url: `https://spicy-rpc.chiliz.com/`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
   },
   etherscan: {
     apiKey: {

@@ -3,7 +3,7 @@ import { ChainConfig } from "@/config/chains";
 import useError from "@/hooks/useError";
 import { Loader2, NetworkIcon, PiggyBankIcon } from "lucide-react";
 import { useState } from "react";
-import { formatEther, zeroAddress } from "viem";
+import { formatUnits, zeroAddress } from "viem";
 import {
   useAccount,
   usePublicClient,
@@ -82,7 +82,10 @@ export function SellerBalanceCard(props: { chainConfig: ChainConfig }) {
         {balance !== undefined ? (
           <div className="flex flex-col items-start gap-4 mt-1">
             <p className="text-sm text-muted-foreground">
-              {formatEther(balance)}{" "}
+              {formatUnits(
+                balance,
+                props.chainConfig.checkoutPaymentTokenDecimals
+              )}{" "}
               {props.chainConfig.checkoutPaymentTokenSymbol}
             </p>
             <Button

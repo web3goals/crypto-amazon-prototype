@@ -9,6 +9,5 @@ export type CheckoutDeal = {
   buyerAddress: string;
   date: bigint;
   paymentAmount: bigint;
-  paymentTokenSymbol: string;
   chainConfig: ChainConfig;
 };

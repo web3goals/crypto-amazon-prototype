@@ -2,13 +2,18 @@
 
 import { getStorefrontChainConfig } from "@/lib/chains";
 import { addressToShortAddress } from "@/lib/converters";
-import { Product } from "@/types/product";
 import { CheckoutDeal } from "@/types/checkout-deal";
-import { ShieldCheckIcon } from "lucide-react";
-import { Address, formatEther, isAddressEqual, zeroAddress } from "viem";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ListedProduct } from "@/types/listed-product";
-import { Skeleton } from "../ui/skeleton";
+import { Product } from "@/types/product";
+import { ShieldCheckIcon } from "lucide-react";
+import {
+  Address,
+  formatEther,
+  formatUnits,
+  isAddressEqual,
+  zeroAddress,
+} from "viem";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Separator } from "../ui/separator";
 
 export function ProductCardHeader(props: {
@@ -108,8 +113,11 @@ export function ProductCardHeader(props: {
               Payment:
             </p>
             <p className="text-sm break-all">
-              {formatEther(props.deal.paymentAmount)}{" "}
-              {props.deal.paymentTokenSymbol} (
+              {formatUnits(
+                props.deal.paymentAmount,
+                props.deal.chainConfig.checkoutPaymentTokenDecimals
+              )}{" "}
+              {props.deal.chainConfig.checkoutPaymentTokenSymbol} (
               {props.deal.chainConfig.chain.name})
             </p>
           </div>

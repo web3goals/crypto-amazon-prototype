@@ -31,22 +31,6 @@ function BuyerPurchasesByChain(props: { chainConfig: ChainConfig }) {
     chainId: props.chainConfig.chain.id,
   });
 
-  const { data: paymentToken } = useReadContract({
-    address: props.chainConfig.checkout,
-    abi: checkoutAbi,
-    functionName: "getPaymentToken",
-    args: [],
-    chainId: props.chainConfig.chain.id,
-  });
-
-  const { data: paymentTokenSymbol } = useReadContract({
-    address: paymentToken,
-    abi: erc20Abi,
-    functionName: "symbol",
-    args: [],
-    chainId: props.chainConfig.chain.id,
-  });
-
   return (
     <EntityList
       entities={purchases}
@@ -62,7 +46,6 @@ function BuyerPurchasesByChain(props: { chainConfig: ChainConfig }) {
               buyerAddress: purchase.buyerAddress,
               date: purchase.date,
               paymentAmount: purchase.paymentAmount,
-              paymentTokenSymbol: paymentTokenSymbol || "",
               chainConfig: props.chainConfig,
             }}
             listedProduct={listedProducts?.find(

@@ -1,15 +1,19 @@
 "use client";
 
+import { fanTokenAbi } from "@/abi/fan-token";
 import { usdtAbi } from "@/abi/usdt";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/components/ui/use-toast";
 import { ChainConfig } from "@/config/chains";
 import useError from "@/hooks/useError";
-import { getChainConfigsWithUsdt } from "@/lib/chains";
+import {
+  getChainConfigsWithFanToken,
+  getChainConfigsWithUsdt,
+} from "@/lib/chains";
 import { CoinsIcon, Loader2 } from "lucide-react";
 import { useState } from "react";
-import { parseEther } from "viem";
+import { parseUnits } from "viem";
 import { useAccount, usePublicClient, useWalletClient } from "wagmi";
 
 export default function FaucetPage() {
@@ -26,6 +30,9 @@ export default function FaucetPage() {
       <div className="flex flex-col gap-4">
         {getChainConfigsWithUsdt().map((chainConfig, index) => (
           <FaucetUsdt key={index} chainConfig={chainConfig} />
+        ))}
+        {getChainConfigsWithFanToken().map((chainConfig, index) => (
+          <FaucetFanToken key={index} chainConfig={chainConfig} />
         ))}
       </div>
     </main>
@@ -56,7 +63,7 @@ function FaucetUsdt(props: { chainConfig: ChainConfig }) {
         address: props.chainConfig.usdt,
         abi: usdtAbi,
         functionName: "mint",
-        args: [parseEther(mintAmount.toString()), address],
+        args: [parseUnits(mintAmount.toString(), 18), address],
         chain: props.chainConfig.chain,
       });
       await publicClient.waitForTransactionReceipt({
@@ -91,6 +98,70 @@ function FaucetUsdt(props: { chainConfig: ChainConfig }) {
           <CoinsIcon className="mr-2 h-4 w-4" />
         )}
         Mint {mintAmount} USDT
+      </Button>
+    </div>
+  );
+}
+
+function FaucetFanToken(props: { chainConfig: ChainConfig }) {
+  const { handleError } = useError();
+  const publicClient = usePublicClient();
+  const { data: walletClient } = useWalletClient();
+  const { address } = useAccount();
+  const [minting, setMinting] = useState(false);
+  const mintAmount = 100;
+
+  async function onMint() {
+    try {
+      setMinting(true);
+      // Check public client
+      if (!publicClient) {
+        throw new Error("Public client is not ready");
+      }
+      // Check wallet
+      if (!address || !walletClient) {
+        throw new Error("Wallet is not connected");
+      }
+      // Send transaction
+      const txHash = await walletClient.writeContract({
+        address: props.chainConfig.fanToken,
+        abi: fanTokenAbi,
+        functionName: "mint",
+        args: [parseUnits(mintAmount.toString(), 0), address],
+        chain: props.chainConfig.chain,
+      });
+      await publicClient.waitForTransactionReceipt({
+        hash: txHash,
+      });
+      toast({ title: "Token minted 🎉" });
+    } catch (error) {
+      handleError(error, true);
+    } finally {
+      setMinting(false);
+    }
+  }
+
+  return (
+    <div className="w-full flex flex-col items-start border rounded px-6 py-8">
+      <p className="text font-bold">FANT ({props.chainConfig.chain.name})</p>
+      <a
+        href={
+          props.chainConfig.chain.blockExplorers?.default.url +
+          "/token/" +
+          props.chainConfig.fanToken
+        }
+        target="_blank"
+        className="text-sm text-muted-foreground break-all underline underline-offset-4 mt-1"
+      >
+        {props.chainConfig.fanToken}
+      </a>
+      <Button className="mt-8" disabled={minting} onClick={() => onMint()}>
+        {minting ? (
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        ) : (
+          <CoinsIcon className="mr-2 h-4 w-4" />
+        )}
+        Mint {mintAmount} FANT
       </Button>
     </div>
   );

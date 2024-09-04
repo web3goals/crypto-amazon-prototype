@@ -4,7 +4,7 @@ import { checkoutAbi } from "@/abi/checkout";
 import { ChainConfig } from "@/config/chains";
 import useListedProductsFinder from "@/hooks/useListedProductsFinder";
 import { getChainConfigsWithCheckout } from "@/lib/chains";
-import { erc20Abi, zeroAddress } from "viem";
+import { zeroAddress } from "viem";
 import { useAccount, useReadContract } from "wagmi";
 import EntityList from "../entity-list";
 import { SellerSaleCard } from "./seller-sale-card";
@@ -31,22 +31,6 @@ function SellerSalesByChain(props: { chainConfig: ChainConfig }) {
     chainId: props.chainConfig.chain.id,
   });
 
-  const { data: paymentToken } = useReadContract({
-    address: props.chainConfig.checkout,
-    abi: checkoutAbi,
-    functionName: "getPaymentToken",
-    args: [],
-    chainId: props.chainConfig.chain.id,
-  });
-
-  const { data: paymentTokenSymbol } = useReadContract({
-    address: paymentToken,
-    abi: erc20Abi,
-    functionName: "symbol",
-    args: [],
-    chainId: props.chainConfig.chain.id,
-  });
-
   return (
     <EntityList
       entities={sales as any[]}
@@ -62,7 +46,6 @@ function SellerSalesByChain(props: { chainConfig: ChainConfig }) {
               buyerAddress: sale.buyerAddress,
               date: sale.date,
               paymentAmount: sale.paymentAmount,
-              paymentTokenSymbol: paymentTokenSymbol || "",
               chainConfig: props.chainConfig,
             }}
             listedProduct={listedProducts?.find(
