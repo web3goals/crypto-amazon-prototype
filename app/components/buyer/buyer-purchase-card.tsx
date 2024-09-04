@@ -2,7 +2,10 @@
 
 import { storefrontAbi } from "@/abi/storefront";
 import useProductFinder from "@/hooks/useProductFinder";
-import { getStorefrontChainConfig } from "@/lib/chains";
+import {
+  getStorefrontChainConfig,
+  getSummarizerChainConfig,
+} from "@/lib/chains";
 import { CheckoutDeal } from "@/types/checkout-deal";
 import { MessagesSquareIcon } from "lucide-react";
 import Link from "next/link";
@@ -13,6 +16,7 @@ import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 import { BuyerSubscribeToSellerButton } from "./buyer-subscribe-to-seller-button";
 import { ListedProduct } from "@/types/listed-product";
+import { summarizerAbi } from "@/abi/summarizer";
 
 export function BuyerPurchaseCard(props: {
   deal: CheckoutDeal;
@@ -28,6 +32,14 @@ export function BuyerPurchaseCard(props: {
     chainId: getStorefrontChainConfig().chain.id,
   });
 
+  const { data: summary } = useReadContract({
+    address: getSummarizerChainConfig().summarizer,
+    abi: summarizerAbi,
+    functionName: "getSummary",
+    args: [props.deal.asin],
+    chainId: getSummarizerChainConfig().chain.id,
+  });
+
   if (!product) {
     return <Skeleton className="w-4" />;
   }
@@ -38,6 +50,7 @@ export function BuyerPurchaseCard(props: {
         product={product}
         listedProduct={props.listedProduct}
         verifiedSeller={verifiedSeller}
+        summary={summary}
         deal={props.deal}
       />
       <Separator className="my-6" />

@@ -1,7 +1,11 @@
 "use client";
 
 import { storefrontAbi } from "@/abi/storefront";
-import { getStorefrontChainConfig } from "@/lib/chains";
+import { summarizerAbi } from "@/abi/summarizer";
+import {
+  getStorefrontChainConfig,
+  getSummarizerChainConfig,
+} from "@/lib/chains";
 import { ListedProduct } from "@/types/listed-product";
 import { Product } from "@/types/product";
 import { useEffect, useState } from "react";
@@ -28,6 +32,14 @@ export function SellerProductCard(props: {
     chainId: getStorefrontChainConfig().chain.id,
   });
 
+  const { data: summary } = useReadContract({
+    address: getSummarizerChainConfig().summarizer,
+    abi: summarizerAbi,
+    functionName: "getSummary",
+    args: [props.product.asin],
+    chainId: getSummarizerChainConfig().chain.id,
+  });
+
   useEffect(() => {
     if (verifiedSeller && address && !isAddressEqual(verifiedSeller, address)) {
       setVerified(false);
@@ -43,6 +55,7 @@ export function SellerProductCard(props: {
         product={props.product}
         listedProduct={props.listedProduct}
         verifiedSeller={verifiedSeller}
+        summary={summary}
       />
       <Separator className="my-6" />
       {verified === false && (
@@ -52,7 +65,10 @@ export function SellerProductCard(props: {
         />
       )}
       {verified === true && (
-        <SellerProductCardFooterVerified product={props.product} />
+        <SellerProductCardFooterVerified
+          product={props.product}
+          summary={summary}
+        />
       )}
     </div>
   );

@@ -8,11 +8,14 @@ import { ShieldCheckIcon } from "lucide-react";
 import { Address, formatEther, isAddressEqual, zeroAddress } from "viem";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ListedProduct } from "@/types/listed-product";
+import { Skeleton } from "../ui/skeleton";
+import { Separator } from "../ui/separator";
 
 export function ProductCardHeader(props: {
   product: Product;
   listedProduct: ListedProduct | undefined;
   verifiedSeller: Address | undefined;
+  summary: string | undefined;
   deal?: CheckoutDeal;
 }) {
   return (
@@ -106,6 +109,15 @@ export function ProductCardHeader(props: {
               {new Date(Number(props.deal.date) * 1000).toLocaleString()}
             </p>
           </div>
+        </>
+      )}
+      {props.summary && (
+        <>
+          <Separator className="my-6" />
+          <p className="text-sm text-muted-foreground">
+            Summary of Amazon reviews:
+          </p>
+          <p className="text-sm mt-1">{props.summary}</p>
         </>
       )}
     </div>

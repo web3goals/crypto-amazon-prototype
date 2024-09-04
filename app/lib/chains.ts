@@ -9,6 +9,10 @@ export function getStorefrontChainConfig(): ChainConfig {
   return chainConfigs.optimismSepolia;
 }
 
+export function getSummarizerChainConfig(): ChainConfig {
+  return chainConfigs.galadrielDevnet;
+}
+
 export function getChainConfigsWithUsdt(): ChainConfig[] {
   return Object.values(chainConfigs).filter(
     (chainConfig) => !isAddressEqual(chainConfig.usdt, zeroAddress)

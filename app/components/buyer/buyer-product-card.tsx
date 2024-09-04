@@ -8,10 +8,14 @@ import { Separator } from "../ui/separator";
 import { ShoppingCartIcon } from "lucide-react";
 import { BuyerProductCardFooterBuying } from "./buyer-product-card-footer-bying";
 import { storefrontAbi } from "@/abi/storefront";
-import { getStorefrontChainConfig } from "@/lib/chains";
+import {
+  getStorefrontChainConfig,
+  getSummarizerChainConfig,
+} from "@/lib/chains";
 import { useReadContract } from "wagmi";
 import { Address } from "viem";
 import { ListedProduct } from "@/types/listed-product";
+import { summarizerAbi } from "@/abi/summarizer";
 
 export function BuyerProductCard(props: {
   product: Product;
@@ -25,12 +29,21 @@ export function BuyerProductCard(props: {
     chainId: getStorefrontChainConfig().chain.id,
   });
 
+  const { data: summary } = useReadContract({
+    address: getSummarizerChainConfig().summarizer,
+    abi: summarizerAbi,
+    functionName: "getSummary",
+    args: [props.product.asin],
+    chainId: getSummarizerChainConfig().chain.id,
+  });
+
   return (
     <div className="w-full flex flex-col border rounded px-6 py-8">
       <ProductCardHeader
         product={props.product}
         listedProduct={props.listedProduct}
         verifiedSeller={verifiedSeller}
+        summary={summary}
       />
       {props.listedProduct && (
         <>
