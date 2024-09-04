@@ -3,20 +3,20 @@ import axios from "axios";
 import { decodeAbiParameters } from "viem";
 
 function signProtocolDataToListedProducts(data: any): ListedProduct[] {
-  const listedProducts: ListedProduct[] = [];
+  const listedProducts: Map<string, ListedProduct> = new Map();
   const attestations: any[] = data.data.rows;
   for (const attestation of attestations.toReversed()) {
     const values = decodeAbiParameters(
       attestation.schema.data,
       attestation.data
     );
-    listedProducts.push({
+    listedProducts.set(values[0], {
       asin: values[0],
       seller: values[1],
       price: values[2],
     });
   }
-  return listedProducts;
+  return Array.from(listedProducts.values());
 }
 
 export async function getListedProductsBySignProtocol(
