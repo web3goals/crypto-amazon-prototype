@@ -24,6 +24,10 @@ const config: HardhatUserConfig = {
       url: "https://devnet.galadriel.com",
       accounts: [process.env.PRIVATE_KEY as string],
     },
+    rootstockTestnet: {
+      url: `https://rpc.testnet.rootstock.io/${process.env.ROOTSTOCK_RPC_API_KEY}`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
   },
   etherscan: {
     apiKey: {

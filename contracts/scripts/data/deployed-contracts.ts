@@ -73,4 +73,18 @@ export const CONTRACTS: {
     chatGpt: "0x12884Fb3EAEB3C0A2C6EC390954304bc37192611",
     summarizer: "0x07b7e2AE0A9B1f74610e2465d8043e7E7a5632A6",
   },
+  rootstockTestnet: {
+    chainlinkFunctions: undefined,
+    chainlinkDataFeed: {
+      address: "0x0000000000000000000000000000000000000000",
+      customAnswer: "100000000",
+    },
+    signProtocol: undefined,
+    galadriel: undefined,
+    storefront: "0x0000000000000000000000000000000000000000",
+    usdt: "0xF1843bab521395b7aE283E93A98423Dc2956bd84",
+    checkout: "0xe9F2eaF94D0F94329381037b98F6795410B8E8F8",
+    chatGpt: "0x0000000000000000000000000000000000000000",
+    summarizer: "0x0000000000000000000000000000000000000000",
+  },
 };

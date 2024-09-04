@@ -19,6 +19,26 @@ const galadrielDevnet: Chain = {
   testnet: true,
 };
 
+const rootstockTestnet: Chain = {
+  id: 31,
+  name: "Rootstock Testnet",
+  nativeCurrency: { name: "tRBTC", symbol: "tRBTC", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: [
+        `https://rpc.testnet.rootstock.io/${process.env.NEXT_PUBLIC_ROOTSTOCK_RPC_API_KEY}`,
+      ],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Rootstock Testnet Explorer",
+      url: "https://explorer.testnet.rootstock.io/",
+    },
+  },
+  testnet: true,
+};
+
 export type ChainConfig = {
   chain: Chain;
   usdt: Address;
@@ -61,6 +81,17 @@ export const chainConfigs = {
     checkout: "0x0000000000000000000000000000000000000000",
     checkoutPaymentTokenSymbol: "",
     summarizer: "0x07b7e2AE0A9B1f74610e2465d8043e7E7a5632A6",
+    signProtocolApi: "",
+    signProtocolSchemaId: "",
+    indexerUrl: "",
+  } as ChainConfig,
+  rootstockTestnet: {
+    chain: rootstockTestnet,
+    usdt: "0xF1843bab521395b7aE283E93A98423Dc2956bd84",
+    storefront: "0x0000000000000000000000000000000000000000",
+    checkout: "0xe9F2eaF94D0F94329381037b98F6795410B8E8F8",
+    checkoutPaymentTokenSymbol: "USDT",
+    summarizer: "0x0000000000000000000000000000000000000000",
     signProtocolApi: "",
     signProtocolSchemaId: "",
     indexerUrl: "",
