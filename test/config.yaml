@@ -2,55 +2,17 @@
 name: Salt Dex Indexer
 rollback_on_reorg: false # hack: performance https://github.com/enviodev/hyperindex/pull/154/files
 contracts:
-  - name: UniswapV3Factory
-    abi_file_path: src/abis/factoryV3Abi.json
-    handler: src/EventHandlerFactoryV3.ts
+  - name: Storefront
+    abi_file_path: src/abis/storefrontAbi.json
+    handler: src/EventHandlers.ts
     events:
-      - event: PoolCreated(address indexed token0, address indexed token1, uint24 indexed fee, int24 tickSpacing, address pool)
-  - name: UniswapV3Pool
-    abi_file_path: src/abis/poolV3Abi.json
-    handler: src/EventHandlerPoolsV3.ts
-    events:
-      - event: Burn(address indexed owner, int24 indexed tickLower, int24 indexed tickUpper, uint128 amount, uint256 amount0, uint256 amount1)
-      - event: Collect(address indexed owner, address recipient, int24 indexed tickLower, int24 indexed tickUpper, uint128 amount0, uint128 amount1)
-      - event: Initialize(uint160 sqrtPriceX96, int24 tick)
-      - event: Mint(address sender, address indexed owner, int24 indexed tickLower, int24 indexed tickUpper, uint128 amount, uint256 amount0, uint256 amount1)
-      - event: Swap(address indexed sender, address indexed recipient, int256 amount0, int256 amount1, uint160 sqrtPriceX96, uint128 liquidity, int24 tick)
-  - name: UniswapV2Factory
-    abi_file_path: src/abis/factoryV2Abi.json
-    handler: src/EventHandlerFactoryV2.ts
-    events:
-      - event: PairCreated(address indexed token0, address indexed token1, address pair, uint256)
-  - name: UniswapV2Pair
-    abi_file_path: src/abis/pairV2Abi.json
-    handler: src/EventHandlerPairsV2.ts
-    events:
-      - event: Mint(address indexed sender, uint amount0, uint amount1)
-      - event: Burn(address indexed sender, uint amount0, uint amount1, address indexed to)
-      - event: Swap(address indexed sender, uint amount0In, uint amount1In, uint amount0Out, uint amount1Out, address indexed to)
-      - event: Sync(uint112 reserve0, uint112 reserve1)
+      - event: ProductListed(string asin, address seller, uint256 price)
 networks:
-  # - id: 1
-  #   start_block: 0
-  #   contracts:
-  #     - name: UniswapV2Factory
-  #       address:
-  #         - 0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f
-  #     - name: UniswapV3Factory
-  #       address:
-  #         - 0x1F98431c8aD98523631AE4a59f267346ea31F984
-  #     - name: UniswapV2Pair
-  #     - name: UniswapV3Pool
-  - id: 8453
+  - id: 11155420
     start_block: 0
     contracts:
-      - name: UniswapV2Factory
+      - name: Storefront
         address:
-          - 0x8909Dc15e40173Ff4699343b6eB8132c65e18eC6
-      - name: UniswapV3Factory
-        address:
-          - 0x33128a8fC17869897dcE68Ed026d694621f6FDfD
-      - name: UniswapV2Pair
-      - name: UniswapV3Pool
+          - 0xf2F5F769509065DFdfe9f31E440F3f94e9F7c21b
 event_decoder: viem
 unordered_multichain_mode: true
