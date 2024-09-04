@@ -1,5 +1,5 @@
 import { Address } from "viem";
-import { Chain, morphHolesky, optimismSepolia } from "viem/chains";
+import { Chain, optimismSepolia } from "viem/chains";
 
 const galadrielDevnet: Chain = {
   id: 696969,
@@ -39,6 +39,25 @@ const rootstockTestnet: Chain = {
   testnet: true,
 };
 
+const morphHoleskyTestnet: Chain = {
+  id: 2810,
+  name: "Morph Holesky Testnet",
+  nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc-quicknode-holesky.morphl2.io"],
+      webSocket: ["wss://rpc-quicknode-holesky.morphl2.io"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Morph Holesky Testnet",
+      url: "https://explorer-holesky.morphl2.io/",
+    },
+  },
+  testnet: true,
+};
+
 export type ChainConfig = {
   chain: Chain;
   usdt: Address;
@@ -63,17 +82,6 @@ export const chainConfigs = {
     signProtocolSchemaId: "onchain_evm_11155420_0x5",
     indexerUrl: "", // TODO: Replace link for release
   } as ChainConfig,
-  morphHolesky: {
-    chain: morphHolesky,
-    usdt: "0x0000000000000000000000000000000000000000",
-    storefront: "0x0000000000000000000000000000000000000000",
-    checkout: "0x0000000000000000000000000000000000000000",
-    checkoutPaymentTokenSymbol: "",
-    summarizer: "0x0000000000000000000000000000000000000000",
-    signProtocolApi: "",
-    signProtocolSchemaId: "",
-    indexerUrl: "",
-  } as ChainConfig,
   galadrielDevnet: {
     chain: galadrielDevnet,
     usdt: "0x0000000000000000000000000000000000000000",
@@ -87,6 +95,17 @@ export const chainConfigs = {
   } as ChainConfig,
   rootstockTestnet: {
     chain: rootstockTestnet,
+    usdt: "0xF1843bab521395b7aE283E93A98423Dc2956bd84",
+    storefront: "0x0000000000000000000000000000000000000000",
+    checkout: "0xe9F2eaF94D0F94329381037b98F6795410B8E8F8",
+    checkoutPaymentTokenSymbol: "USDT",
+    summarizer: "0x0000000000000000000000000000000000000000",
+    signProtocolApi: "",
+    signProtocolSchemaId: "",
+    indexerUrl: "",
+  } as ChainConfig,
+  morphHoleskyTestnet: {
+    chain: morphHoleskyTestnet,
     usdt: "0xF1843bab521395b7aE283E93A98423Dc2956bd84",
     storefront: "0x0000000000000000000000000000000000000000",
     checkout: "0xe9F2eaF94D0F94329381037b98F6795410B8E8F8",

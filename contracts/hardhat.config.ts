@@ -28,6 +28,10 @@ const config: HardhatUserConfig = {
       url: `https://rpc.testnet.rootstock.io/${process.env.ROOTSTOCK_RPC_API_KEY}`,
       accounts: [process.env.PRIVATE_KEY as string],
     },
+    morphHoleskyTestnet: {
+      url: `https://rpc-quicknode-holesky.morphl2.io`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
   },
   etherscan: {
     apiKey: {
