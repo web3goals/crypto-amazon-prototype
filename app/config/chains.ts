@@ -102,7 +102,7 @@ export const chainConfigs = {
     summarizer: "0x0000000000000000000000000000000000000000",
     signProtocolApi: "https://testnet-rpc.sign.global/api",
     signProtocolSchemaId: "onchain_evm_11155420_0x5",
-    indexerUrl: "", // TODO: Replace link for release
+    indexerUrl: "https://indexer.bigdevenergy.link/9634760/v1/graphql",
   } as ChainConfig,
   galadrielDevnet: {
     chain: galadrielDevnet,

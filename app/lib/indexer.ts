@@ -1,14 +1,24 @@
 import { ListedProduct } from "@/types/listed-product";
 import axios from "axios";
 
-// TODO: Return only the last prices
+function indexerDataToListedProducts(data: any): ListedProduct[] {
+  const listedProducts: Map<string, ListedProduct> = new Map();
+  const dataListedProducts: any[] = data.data.Storefront_ProductListed;
+  for (const dataListedProduct of dataListedProducts) {
+    listedProducts.set(dataListedProduct.asin, {
+      asin: dataListedProduct.asin,
+      seller: dataListedProduct.seller,
+      price: BigInt(dataListedProduct.price),
+    });
+  }
+  return Array.from(listedProducts.values());
+}
+
 export async function getListedProductsByIndexer(
   indexerUrl: string
 ): Promise<ListedProduct[] | undefined> {
-  const { data } = await axios.post(
-    indexerUrl,
-    {
-      query: `
+  const { data } = await axios.post(indexerUrl, {
+    query: `
         query MyQuery {
             Storefront_ProductListed {
                 id
@@ -18,22 +28,16 @@ export async function getListedProductsByIndexer(
             }
         }
         `,
-    },
-    { headers: { "x-hasura-admin-secret": "testing" } }
-  );
-  const listedProducts = data.data.Storefront_ProductListed;
-  return listedProducts?.[0];
+  });
+  return indexerDataToListedProducts(data);
 }
 
-// TODO: Return only the last prices
 export async function getListedProductByIndexer(
   indexerUrl: string,
   asin: string
 ): Promise<ListedProduct | undefined> {
-  const { data } = await axios.post(
-    indexerUrl,
-    {
-      query: `
+  const { data } = await axios.post(indexerUrl, {
+    query: `
         query MyQuery {
             Storefront_ProductListed(where: {asin: {_eq: "${asin}"}}) {
                 id
@@ -43,9 +47,6 @@ export async function getListedProductByIndexer(
             }
         }
         `,
-    },
-    { headers: { "x-hasura-admin-secret": "testing" } }
-  );
-  const listedProducts = data.data.Storefront_ProductListed;
-  return listedProducts?.[0];
+  });
+  return indexerDataToListedProducts(data)[0];
 }
