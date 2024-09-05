@@ -36,6 +36,10 @@ const config: HardhatUserConfig = {
       url: `https://spicy-rpc.chiliz.com/`,
       accounts: [process.env.PRIVATE_KEY as string],
     },
+    hederaTestnet: {
+      url: `https://pool.arkhia.io/hedera/testnet/json-rpc/v1/${process.env.HEDERA_RPC_API_KEY}`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
   },
   etherscan: {
     apiKey: {
