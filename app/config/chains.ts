@@ -76,6 +76,24 @@ const chilizSpicyTestnet: Chain = {
   testnet: true,
 };
 
+const hederaTestnet: Chain = {
+  id: 296,
+  name: "Hedera Testnet",
+  nativeCurrency: { name: "HBAR", symbol: "HBAR", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://testnet.hashio.io/api"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Hedera Testnet Explorer",
+      url: "https://hashscan.io/testnet/dashboard",
+    },
+  },
+  testnet: true,
+};
+
 export type ChainConfig = {
   chain: Chain;
   usdt: Address;
@@ -151,6 +169,19 @@ export const chainConfigs = {
     checkout: "0x12884Fb3EAEB3C0A2C6EC390954304bc37192611",
     checkoutPaymentTokenSymbol: "FANT",
     checkoutPaymentTokenDecimals: 0,
+    summarizer: "0x0000000000000000000000000000000000000000",
+    signProtocolApi: "",
+    signProtocolSchemaId: "",
+    indexerUrl: "",
+  } as ChainConfig,
+  hederaTestnet: {
+    chain: hederaTestnet,
+    usdt: "0x1c1c64407d373bcD4faA320586e1f97a56a43AEC",
+    fanToken: "0x0000000000000000000000000000000000000000",
+    storefront: "0x0000000000000000000000000000000000000000",
+    checkout: "0x8db9bad4D40d2b9cB038d0A9f919F48aB0ae0457",
+    checkoutPaymentTokenSymbol: "USDT",
+    checkoutPaymentTokenDecimals: 3,
     summarizer: "0x0000000000000000000000000000000000000000",
     signProtocolApi: "",
     signProtocolSchemaId: "",
