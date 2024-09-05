@@ -16,7 +16,11 @@ Connect your Amazon seller account and start accepting crypto payments in a few 
 
 ## 🔗 Artifacts
 
-...
+- Application -
+- Application source -
+- Contracts source -
+- Indexer source -
+- Hedera scripts -
 
 ## 🏗️ Architecture
 
