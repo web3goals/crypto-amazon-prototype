@@ -6,6 +6,15 @@ export const testSellerAccountConfig = {
   amazonToken: "TEST_TOKEN",
   products: [
     {
+      asin: "B0CSS772MB",
+      image: "https://c.media-amazon.com/images/I/518R2CA7HAL._AC_SL1000_.jpg",
+      title:
+        "SecuX Shield Bio Crypto Hardware Wallet - Secure Biometric Authentication, Cold Storage Card for NFT, Bitcoin, Ethereum, Cardano, ERC20, BEP20, and More",
+      seller: "A3JVUYUGKS46N6",
+      sellerTitle: "SafePal Official",
+      reviews: `1. This is such a great cold wallet. It was easy to set up and use. I really like that I can carry it in my wallet and it has multiple authentication methods to protect your investments. It can seem intimidating, but the instructions and app help to make the setup very easy. 2. Super easy crypto card. Easy for beginners to get started. Way more secure feeling then leaving crypto online. 3. This wallet is built like a vault, keeping crypto assets secure. Its biometric authentication adds an advanced layer of security in a compact and sleek design. Using it is intuitive, making it accessible even for those new to crypto.`,
+    },
+    {
       asin: "B07L83HND8",
       image: "https://c.media-amazon.com/images/I/51wmGOk1EjL._AC_SL1000_.jpg",
       title:
