@@ -5,9 +5,9 @@ export default function SellerBalancePage() {
   return (
     <main className="container py-10 lg:px-80">
       <div className="space-y-0.5">
-        <h2 className="text-2xl font-bold tracking-tight">Broadcast</h2>
+        <h2 className="text-2xl font-bold tracking-tight">Balance</h2>
         <p className="text-muted-foreground">
-          Tell subscribers about your promotions
+          Income you made by selling your products for crypto
         </p>
       </div>
       <Separator className="my-6" />
