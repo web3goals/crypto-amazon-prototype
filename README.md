@@ -22,13 +22,13 @@ Connect your Amazon seller account and start accepting crypto payments in a few 
 ## 🛠️ Technologies
 
 - **Sign Protocol** is used as a platform to make attestations of the listed products with all the details and as indexer to display all listed products in the explore page.
-- **Chainlink** is used as an oracle connected to Amazon's API to verify sellers and their products.
-- **XMTP** is used as a messaging protocol that helps buyers communicate with sellers and subscribe to their updates.
-- **Envio** is used as an indexer that lets users instantly find listed Amazon products.
-- **Web3Auth** is used as an authentication service that gives users the ability to connect their crypto wallets or social accounts.
+- **Chainlink** is used as an oracle connected to Amazon's API to verify sellers and as a data feed to calculate the actual price depending on the buyer's token.
+- **XMTP** is used as a messaging protocol that helps buyers communicate with sellers (**Converse App**) and subscribe to their updates.
+- **Envio (Hosted Service)** is used as an indexer that lets users instantly find listed Amazon products.
+- **Web3Auth (Modal SDK)** is used as an authentication service that gives users the ability to connect their crypto wallets or social accounts.
 - **Galadriel** is used as a blockchain for smart contract integrated with GPT to summarize Amazon reviews on product cards.
 - **Rootstock** and **Morph** as blockchains are used for smart contracts that handle all transactions from seller verification and product purchases to income withdrawals.
-- **Hedera** network and Hedera tools are used to deploy tokens and smart contracts with checkout functions.
+- **Hedera** network and **Hedera tools (HTS, HSCS)** are used to deploy tokens and smart contracts with checkout functions.
 - **Chiliz** is used as a blockchain to let fans buy Amazon products with their fan tokens.
 - Hardhat, OpenZeppelin, Next.js, shadcn/ui, viem, Wagmi.
 
@@ -62,6 +62,7 @@ Connect your Amazon seller account and start accepting crypto payments in a few 
 
 ![Architecture](/Architecture.png)
 
-## 💡 Recommendations
+## 💡 Feedback
 
-...
+- Feedback for the Rootstock team:
+  - It would be great to add a link to faucet in the developer documentation to make the first steps easier (https://faucet.rootstock.io/)
