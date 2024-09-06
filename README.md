@@ -65,4 +65,6 @@ Connect your Amazon seller account and start accepting crypto payments in a few 
 ## 💡 Feedback
 
 - Feedback for the Rootstock team:
-  - It would be great to add a link to faucet in the developer documentation to make the first steps easier (https://faucet.rootstock.io/)
+  - It would be great to add a link to faucet in the developer documentation to make the first steps easier. Finding this link was more difficult than in other projects, it can be very confusing for new developers.
+- Feedback for the Morph team:
+  - It would be great to integrate an AI assistant into the documentation, because this assistant can really help a new developer understand the specifics of Morph Modular Design and other topics. For example, kapa.ai can help with this idea.
