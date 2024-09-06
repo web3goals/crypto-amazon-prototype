@@ -58,13 +58,13 @@ Connect your Amazon seller account and start accepting crypto payments in a few 
   - USDT - 0x1c1c64407d373bcD4faA320586e1f97a56a43AEC
   - Checkout - 0x8db9bad4D40d2b9cB038d0A9f919F48aB0ae0457
 
-## 🏗️ Architecture
-
-![Architecture](/Architecture.png)
-
 ## 💡 Feedback
 
 - Feedback for the Rootstock team:
   - It would be great to add a link to faucet in the developer documentation to make the first steps easier. Finding this link was more difficult than in other projects, it can be very confusing for new developers.
 - Feedback for the Morph team:
   - It would be great to integrate an AI assistant into the documentation, because this assistant can really help a new developer understand the specifics of Morph Modular Design and other topics. For example, kapa.ai can help with this idea.
+
+## 🏗️ Architecture
+
+![Architecture](/Architecture.png)
