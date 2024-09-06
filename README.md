@@ -21,7 +21,7 @@ Connect your Amazon seller account and start accepting crypto payments in a few 
 
 ## 🛠️ Technologies
 
-- **Sign Protocol** is used as a platform to make attestations of the listed products with all the details and prices.
+- **Sign Protocol** is used as a platform to make attestations of the listed products with all the details and as indexer to display all listed products in the explore page.
 - **Chainlink** is used as an oracle connected to Amazon's API to verify sellers and their products.
 - **XMTP** is used as a messaging protocol that helps buyers communicate with sellers and subscribe to their updates.
 - **Envio** is used as an indexer that lets users instantly find listed Amazon products.
